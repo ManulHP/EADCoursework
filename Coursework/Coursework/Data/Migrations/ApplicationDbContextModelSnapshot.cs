@@ -30,13 +30,56 @@ namespace Coursework.Data.Migrations
                         .HasMaxLength(55)
                         .HasColumnType("nvarchar(55)");
 
+                    b.Property<int?>("TicketId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Title")
                         .HasMaxLength(55)
                         .HasColumnType("nvarchar(55)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("TicketId");
+
                     b.ToTable("Projects");
+                });
+
+            modelBuilder.Entity("Coursework.Data.Ticket.CheckList", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Item")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("TicketId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TicketId");
+
+                    b.ToTable("CheckLists");
+                });
+
+            modelBuilder.Entity("Coursework.Data.Ticket.Ticket", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tickets");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -239,6 +282,22 @@ namespace Coursework.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Coursework.Data.Project.Project", b =>
+                {
+                    b.HasOne("Coursework.Data.Ticket.Ticket", "Ticket")
+                        .WithMany()
+                        .HasForeignKey("TicketId");
+
+                    b.Navigation("Ticket");
+                });
+
+            modelBuilder.Entity("Coursework.Data.Ticket.CheckList", b =>
+                {
+                    b.HasOne("Coursework.Data.Ticket.Ticket", null)
+                        .WithMany("MyChecklist")
+                        .HasForeignKey("TicketId");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -288,6 +347,11 @@ namespace Coursework.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Coursework.Data.Ticket.Ticket", b =>
+                {
+                    b.Navigation("MyChecklist");
                 });
 #pragma warning restore 612, 618
         }
