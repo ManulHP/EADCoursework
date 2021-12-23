@@ -89,6 +89,13 @@ using Coursework.Data;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 8 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\Index.razor"
+using System.IO;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/")]
     public partial class Index : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -97,18 +104,9 @@ using Coursework.Data;
         {
         }
         #pragma warning restore 1998
-#nullable restore
-#line 44 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\Index.razor"
-       
-    List<Coursework.Data.Project.Project> EmpObj;
-    protected override async Task OnInitializedAsync()
-    {
-        EmpObj = await Task.Run(() => projectService.GetAllEmployeesAsync());
-    }
-
-#line default
-#line hidden
-#nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private Microsoft.JSInterop.IJSRuntime JS { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IJSRuntime js { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private Coursework.Data.Project.ProjectService projectService { get; set; }
     }
 }

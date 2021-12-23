@@ -1,0 +1,58 @@
+﻿@page "/AddTicket/{Id}"
+@using Coursework.Data
+@inject Coursework.Data.Ticket.TicketService ticketService
+@inject NavigationManager NavigationManager
+
+<h2>Add Project</h2>
+<hr />
+
+<form>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="Name" class="control-label">Name</label>
+                <input form="Name" class="form-control" @bind="@obj.Title" />
+            </div>
+
+            <div class="form-group">
+                <label for="City" class="control-label">Detail</label>
+                <input form="City" class="form-control" @bind="@obj.Description" />
+            </div>
+
+            <div class="form-group">
+                <input form="City" type="hidden" class="form-control" @bind="@obj.ProjectId"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <input type="button" class="btn btn-primary" @onclick="@CreateEmployee" value="Save" />
+                <input type="button" class="btn btn-primary" @onclick="@Cancel" value="Cancel" />
+            </div>
+        </div>
+    </div>
+</form>
+
+
+@code {
+    [Parameter]
+    public String Id { get; set; }
+
+    Coursework.Data.Ticket.Ticket obj = new Coursework.Data.Ticket.Ticket();
+    protected override void OnInitialized()
+    {
+        obj.ProjectId = Id;
+    }
+
+    protected async void CreateEmployee()
+    {
+        await ticketService.InsertEmployeeAsync(obj);
+        NavigationManager.NavigateTo($"/Dash/{Id}");
+    }
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("Dash");
+    }
+}

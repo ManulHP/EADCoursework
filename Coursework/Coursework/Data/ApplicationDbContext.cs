@@ -13,6 +13,9 @@ namespace Coursework.Data
         {
         }
 
+
+
         public DbSet<Coursework.Data.Project.Project> Projects { get; set; }
+        public DbSet<Coursework.Data.Ticket.Ticket> Tickets { get; set; }
     }
 }

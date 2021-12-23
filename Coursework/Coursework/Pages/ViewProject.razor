@@ -1,56 +1,112 @@
-﻿@page "/ViewProject"
+﻿@page "/ViewPorject"
 @using Coursework.Data
 @inject Coursework.Data.Project.ProjectService projectService
+@inject NavigationManager NavigationManager
+@inject IJSRuntime js
 
-<NavLink class="nav-link" href="CreateProject">
-    <span class="oi oi-plus" aria-hidden="true">Add Project</span>
+@inject Microsoft.JSInterop.IJSRuntime JS
+@using  System.IO;
 
-</NavLink>
 
-<h1>Workspace</h1>
 @if (EmpObj is null)
 {
-    <p><em>Loading... !</em></p>
+    <p><em>Fetching data... Please wait !</em></p>
 }
 else
 {
-<div class="container">
-    <table class="table table-striped table-bordered">
+
+    <div class="row">
+        <div class="col-lg-9">
+            <h1>WorkSpace</h1>
+        </div>
+        <div class="col-lg-3 text-right">
+            <a class="btn btn-success btn-sm" href="CreateProject" role="button">Create New</a>
+            <button class="btn btn-success btn-sm" @onclick="MessageBox">Show Message</button>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-striped table-sm">
         <thead>
             <tr>
-                <th>Emp Id</th>
+
                 <th>Title</th>
                 <th>Comapany Name</th>
-
+                <th></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var emp in EmpObj)
             {
                 <tr>
-                    <td>@emp.Id</td>
+
                     <td>@emp.Title</td>
                     <td>@emp.CompanyName</td>
-
-                    <td>
-                        <a class="nav-link" href="EditProject/@emp.Id">
-                            <span class="oi oi-pencil" aria-hidden="true">Edit</span>
-                        </a>
-                        <a class="nav-link" href="DeleteProject/@emp.Id">
-                            <span class="oi oi-trash" aria-hidden="true">Delete</span>
-                        </a>
+                    <td class="text-right">
+                        <a class="btn btn-primary btn-sm" href="EditProject/@emp.Id" role="button">Edit</a>
+                        <a class="btn btn-danger btn-sm" href="DeleteProject/@emp.Id" role="button">Delete</a>
+                        <a class="btn btn-dark btn-sm" href="" role="button">Report</a>
+                        <button type="button" @onclick="PrintReport">Print</button>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
-</div>
+
+
+    @*<div class="wrapper">
+            <div class="item">box 1</div>
+            <div class="item">box 1</div>
+            <div class="item">box 1</div>
+            <div class="item">box 1</div>
+            <div class="item">box 1</div>
+        </div>*@
+
 }
+
+
+<style>
+    .wrapper {
+        max-height: 120px;
+        border: 1px solid #808080;
+        display: flex;
+        overflow-x: auto;
+    }
+
+        .wrapper::webkit-scrollbar {
+            width: 0;
+        }
+
+        .wrapper .item {
+            width: 110px;
+            height: 110px;
+            line-height: 110px;
+            text-align: center;
+            background-color: aqua;
+            margin-right: 2px;
+        }
+</style>
 
 @code {
     List<Coursework.Data.Project.Project> EmpObj;
+    Coursework.Data.Project.Project obj = new Coursework.Data.Project.Project();
     protected override async Task OnInitializedAsync()
     {
         EmpObj = await Task.Run(() => projectService.GetAllEmployeesAsync());
+
     }
+
+
+    [Inject] IJSRuntime JSRuntime { get; set; }
+    protected async Task MessageBox()
+    {
+        await JSRuntime.InvokeVoidAsync("exampleJsFunctions.ShowMsg",
+                                                     "Hello Blazor");
+    }
+
+    private void PrintReport()
+    {
+        JS.InvokeVoidAsync("print");
+    }
+
 }
+

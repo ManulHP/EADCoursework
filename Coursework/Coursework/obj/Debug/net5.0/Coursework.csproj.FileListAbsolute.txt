@@ -196,3 +196,15 @@ C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursew
 C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\obj\Debug\net5.0\Razor\Pages\Shared\_ValidationScriptsPartial.cshtml.g.cs
 C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\obj\Debug\net5.0\Razor\Pages\_ViewImports.cshtml.g.cs
 C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\obj\Debug\net5.0\Razor\Pages\_ViewStart.cshtml.g.cs
+C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\obj\Debug\net5.0\RazorDeclaration\Pages\Dashboard.razor.g.cs
+C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\obj\Debug\net5.0\Razor\Pages\Dashboard.razor.g.cs
+C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\obj\Debug\net5.0\RazorDeclaration\Pages\AddTicket.razor.g.cs
+C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\obj\Debug\net5.0\Razor\Pages\AddTicket.razor.g.cs
+C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\bin\Debug\net5.0\iTextSharp.LGPLv2.Core.dll
+C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\bin\Debug\net5.0\BouncyCastle.Crypto.dll
+C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\bin\Debug\net5.0\System.Drawing.Common.dll
+C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\bin\Debug\net5.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\bin\Debug\net5.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\bin\Debug\net5.0\Syncfusion.Compression.Portable.dll
+C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\bin\Debug\net5.0\Syncfusion.Licensing.dll
+C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\bin\Debug\net5.0\Syncfusion.Pdf.Portable.dll

@@ -1,0 +1,48 @@
+﻿@page "/Dash/{Id}"
+@using Coursework.Data
+@inject Coursework.Data.Ticket.TicketService ticketService
+@inject NavigationManager NavigationManager
+
+<style>
+    body {
+        background-color: blueviolet;
+    }
+</style>
+
+
+<button type="button" @onclick="ButtonClick">Add new ticket</button>
+
+<h1>Employee Info</h1>
+@if (EmpObj is null)
+{
+    <p><em>Loading... !</em></p>
+}
+else
+{
+    <ul>
+        @foreach (var todo in EmpObj)
+        {
+            <li>@todo.Title</li>
+            <li>@todo.Description</li>
+        }
+    </ul>
+}
+
+
+
+@code {
+    [Parameter]
+    public String Id { get; set; }
+
+
+    List<Coursework.Data.Ticket.Ticket> EmpObj;
+    protected override async Task OnInitializedAsync()
+    {
+        EmpObj = await Task.Run(() => ticketService.GetAllEmployeesAsync());
+    }
+
+    protected async void ButtonClick()
+    {
+        NavigationManager.NavigateTo($"/AddTicket/{Id}");
+    }
+}

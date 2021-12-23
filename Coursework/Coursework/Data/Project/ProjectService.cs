@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.JSInterop;
 
 namespace Coursework.Data.Project
 {
@@ -23,6 +24,7 @@ namespace Coursework.Data.Project
         public async Task<List<Coursework.Data.Project.Project>> GetAllEmployeesAsync()
         {
             return await _appDBContext.Projects.ToListAsync();
+
         }
         #endregion
 

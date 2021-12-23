@@ -104,7 +104,7 @@ using Coursework.Data;
     protected async void CreateEmployee()
     {
         await projectService.InsertEmployeeAsync(obj);
-        NavigationManager.NavigateTo("");
+        NavigationManager.NavigateTo($"/Dash/{obj.Id}");
     }
     void Cancel()
     {

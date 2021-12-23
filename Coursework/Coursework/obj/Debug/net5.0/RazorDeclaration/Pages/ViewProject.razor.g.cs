@@ -89,7 +89,14 @@ using Coursework.Data;
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/ViewProject")]
+#nullable restore
+#line 8 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\ViewProject.razor"
+using System.IO;
+
+#line default
+#line hidden
+#nullable disable
+    [Microsoft.AspNetCore.Components.RouteAttribute("/ViewPorject")]
     public partial class ViewProject : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
@@ -98,17 +105,36 @@ using Coursework.Data;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 50 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\ViewProject.razor"
+#line 89 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\ViewProject.razor"
        
     List<Coursework.Data.Project.Project> EmpObj;
+    Coursework.Data.Project.Project obj = new Coursework.Data.Project.Project();
     protected override async Task OnInitializedAsync()
     {
         EmpObj = await Task.Run(() => projectService.GetAllEmployeesAsync());
+
     }
+
+
+    [Inject] IJSRuntime JSRuntime { get; set; }
+    protected async Task MessageBox()
+    {
+        await JSRuntime.InvokeVoidAsync("exampleJsFunctions.ShowMsg",
+                                                     "Hello Blazor");
+    }
+
+    private void PrintReport()
+    {
+        JS.InvokeVoidAsync("print");
+    }
+
 
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private Microsoft.JSInterop.IJSRuntime JS { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IJSRuntime js { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private Coursework.Data.Project.ProjectService projectService { get; set; }
     }
 }

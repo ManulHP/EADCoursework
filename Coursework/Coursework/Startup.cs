@@ -43,6 +43,7 @@ namespace Coursework
             services.AddSingleton<WeatherForecastService>();
 
             services.AddScoped<Coursework.Data.Project.ProjectService>();
+            services.AddScoped<Coursework.Data.Ticket.TicketService>();
 
             #region Connection String
             services.AddDbContext<ApplicationDbContext>(item => item.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));

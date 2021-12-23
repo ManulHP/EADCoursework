@@ -46,16 +46,6 @@ namespace Coursework.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [StringLength(55)]
-            [Display(Name = "FirstName")]
-            public string FirstName { get; set; }
-
-            [Required]
-            [StringLength(55)]
-            [Display(Name = "LastName")]
-            public string LastName { get; set; }
-
-            [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }

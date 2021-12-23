@@ -90,7 +90,7 @@ using Coursework.Shared;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 24 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Shared\NavMenu.razor"
+#line 23 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Shared\NavMenu.razor"
        
     private bool collapseNavMenu = true;
 
