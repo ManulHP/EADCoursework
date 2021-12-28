@@ -1,0 +1,132 @@
+﻿@page "/ViewPorject"
+@using Coursework.Data
+@inject Coursework.Data.Project.ProjectService projectService
+@inject Coursework.Data.Ticket.TicketService ticketService
+@inject NavigationManager NavigationManager
+@inject IJSRuntime js
+
+@inject Microsoft.JSInterop.IJSRuntime JS
+@using  System.IO;
+
+
+@if (EmpObj is null)
+{
+    <p><em>Fetching data... Please wait !</em></p>
+}
+else
+{
+
+    <div class="row">
+        <div class="col-lg-9">
+            <h1>WorkSpace</h1>
+        </div>
+        <div class="col-lg-3 text-right">
+            <a class="btn btn-success btn-sm" href="CreateProject" role="button">Create New</a>
+            <button class="btn btn-success btn-sm" @onclick="MessageBox">Show Message</button>
+        </div>
+    </div>
+
+    <table class="table table-borderless table-striped table-sm col px-md-2">
+        <thead class="thead-dark">
+            <tr>
+
+                <th scope="col">Title</th>
+                <th scope="col">Comapany Name</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var emp in EmpObj)
+            {
+                <tr>
+
+                    <td>@emp.Title</td>
+                    <td>@emp.CompanyName</td>
+                    <td class="text-right">
+                        <a class="btn btn-danger btn-sm" href="Dash/@emp.Id" role="button">View</a>
+                        <a class="btn btn-primary btn-sm" href="EditProject/@emp.Id" role="button">Edit</a>
+                        <a class="btn btn-danger btn-sm" href="DeleteProject/@emp.Id" role="button">Delete</a>
+                        <a class="btn btn-dark btn-sm" href="" role="button">Report</a>
+                        <button type="button" @onclick="PrintReport">Print</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+
+
+@*@if (EmpObj is null)
+    {
+        <p><em>Fetching data... Please wait !</em></p>
+    }
+    else
+    {
+
+        @foreach (var emp in EmpObj)
+        {
+            <div class="card" style="width: 15rem; height: 10rem;">
+                <div class="card-body">
+                    <h5 class="card-title">@emp.CompanyName</h5>
+                    <p class="card-text">@emp.Title</p>
+                </div>
+                <div class="card-body">
+                    <a class="btn btn-danger btn-sm" href="Dash/@emp.Id" role="button">View</a>
+                    <a class="btn btn-primary btn-sm" href="EditProject/@emp.Id" role="button">Edit</a>
+                    <a class="btn btn-danger btn-sm" href="DeleteProject/@emp.Id" role="button">Delete</a>
+                </div>
+            </div>
+        }
+
+    }*@
+
+
+
+
+
+<style>
+    .wrapper {
+        max-height: 120px;
+        border: 1px solid #808080;
+        display: flex;
+        overflow-x: auto;
+    }
+
+        .wrapper::webkit-scrollbar {
+            width: 0;
+        }
+
+        .wrapper .item {
+            width: 110px;
+            height: 110px;
+            line-height: 110px;
+            text-align: center;
+            background-color: aqua;
+            margin-right: 2px;
+        }
+</style>
+
+@code {
+    List<Coursework.Data.Project.Project> EmpObj;
+    protected override async Task OnInitializedAsync()
+    {
+        EmpObj = await Task.Run(() => projectService.GetAllEmployeesAsync());
+
+    }
+
+
+    [Inject] IJSRuntime JSRuntime { get; set; }
+    protected async Task MessageBox()
+    {
+        await JSRuntime.InvokeVoidAsync("exampleJsFunctions.ShowMsg",
+                                                     "Hello Blazor");
+    }
+
+    private void PrintReport()
+    {
+        JS.InvokeVoidAsync("print");
+    }
+
+}
+

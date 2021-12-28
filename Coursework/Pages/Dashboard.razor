@@ -1,0 +1,141 @@
+﻿@page "/Dash/{Id}"
+@using Coursework.Data
+@inject Coursework.Data.Ticket.TicketService ticketService
+@inject NavigationManager NavigationManager
+@inject Microsoft.JSInterop.IJSRuntime JS
+@using  System.IO;
+
+
+
+<button type="button" @onclick="ButtonClick">Add new ticket</button>
+
+
+
+@if (TicketObj is null)
+{
+    <p><em>Loading... !</em></p>
+}
+else
+{
+    <table class="table table-borderless table-striped table-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">New</th>
+                <th scope="col">Assignee</th>
+                <th scope="col">Status</th>
+                <th scope="col">Due Date</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var emp in TicketObj)
+            {
+                if (emp.Status == "New")
+                {
+                    <tr>
+
+                        <td>@emp.Description</td>
+                        <td>@emp.Assignee</td>
+                        <td>@emp.Status</td>
+                        <td>@emp.DueDate</td>
+                        <td class="text-right">
+                            <a class="btn btn-primary btn-sm" href="EditTicket/@emp.Id" role="button">Edit</a>
+                            <a class="btn btn-danger btn-sm" href="DeleteProject/@emp.Id" role="button">Delete</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+    <table class="table table-borderless table-striped table-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">In-progress</th>
+                <th scope="col">Assignee</th>
+                <th scope="col">Status</th>
+                <th scope="col">Due Date</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var emp in TicketObj)
+            {
+                if (emp.Status == "In-progress")
+                {
+                    <tr>
+
+                        <td>@emp.Description</td>
+                        <td>@emp.Assignee</td>
+                        <td>@emp.Status</td>
+                        <td>@emp.DueDate</td>
+                        <td class="text-right">
+                            <a class="btn btn-primary btn-sm" href="EditTicket/@emp.Id" role="button">Edit</a>
+                            <a class="btn btn-danger btn-sm" href="DeleteProject/@emp.Id" role="button">Delete</a>
+
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+    <table class="table table-borderless table-striped table-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Closed</th>
+                <th scope="col">Assignee</th>
+                <th scope="col">Status</th>
+                <th scope="col">Due Date</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var emp in TicketObj)
+            {
+                if (emp.Status == "Closed")
+                {
+                    <tr>
+
+                        <td>@emp.Description</td>
+                        <td>@emp.Assignee</td>
+                        <td>@emp.Status</td>
+                        <td>@emp.DueDate</td>
+                        <td class="text-right">
+                            <a class="btn btn-primary btn-sm" href="EditTicket/@emp.Id" role="button">Edit</a>
+                            <a class="btn btn-danger btn-sm" href="DeleteProject/@emp.Id" role="button">Delete</a>
+
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+}
+
+
+
+@code {
+    [Parameter]
+    public String Id { get; set; }
+
+    List<Coursework.Data.Ticket.Ticket> TicketObj;
+    private Coursework.Data.Ticket.Ticket[] TicketArray;
+
+
+    Coursework.Data.Ticket.Ticket obj = new Coursework.Data.Ticket.Ticket();
+    List<Coursework.Data.Ticket.Ticket> EmpObj;
+
+    protected override async Task OnInitializedAsync()
+    {
+        EmpObj = await Task.Run(() => ticketService.GetAllEmployeesAsync());
+        //get ticket by id
+        TicketObj = EmpObj.Where(x => x.ProjectId.Contains(Id)).ToList();
+        TicketArray = TicketObj.ToArray();
+    }
+
+    protected async void ButtonClick()
+    {
+        NavigationManager.NavigateTo($"/AddTicket/{Id}");
+    }
+}
