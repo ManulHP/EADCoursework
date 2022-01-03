@@ -44,6 +44,7 @@ namespace Coursework
 
             services.AddScoped<Coursework.Data.Project.ProjectService>();
             services.AddScoped<Coursework.Data.Ticket.TicketService>();
+            services.AddSingleton<ExportService>();
 
 
             #region Connection String

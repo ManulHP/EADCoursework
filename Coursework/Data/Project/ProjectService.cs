@@ -71,5 +71,6 @@ namespace Coursework.Data.Project
         {
             return await _appDBContext.Projects.ToArrayAsync();
         }
+
     }
 }
