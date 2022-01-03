@@ -210,3 +210,5 @@ C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursew
 C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\bin\Debug\net5.0\Syncfusion.Pdf.Portable.dll
 C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\obj\Debug\net5.0\RazorDeclaration\Pages\EditTicket.razor.g.cs
 C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\obj\Debug\net5.0\Razor\Pages\EditTicket.razor.g.cs
+C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\bin\Debug\net5.0\Blazored.Modal.dll
+C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\bin\Debug\net5.0\Microsoft.JSInterop.WebAssembly.dll
