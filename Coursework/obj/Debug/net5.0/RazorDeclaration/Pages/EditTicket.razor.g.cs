@@ -98,14 +98,14 @@ using Coursework.Data;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 56 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\EditTicket.razor"
+#line 61 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\EditTicket.razor"
        
     [Parameter]
     public String Id { get; set; }
     Coursework.Data.Ticket.Ticket obj = new Coursework.Data.Ticket.Ticket();
     protected override async Task OnInitializedAsync()
     {
-        obj = await Task.Run(() => ticketService.GetEmployeeAsync(Convert.ToInt32(Id)));
+        obj = await Task.Run(() => ticketService.GetTicketAsync(Convert.ToInt32(Id)));
     }
     protected async void UpdateEmployee()
     {

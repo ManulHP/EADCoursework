@@ -105,12 +105,12 @@ using System.IO;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 110 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\ViewProject.razor"
+#line 109 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\ViewProject.razor"
        
     List<Coursework.Data.Project.Project> EmpObj;
     protected override async Task OnInitializedAsync()
     {
-        EmpObj = await Task.Run(() => projectService.GetAllEmployeesAsync());
+        EmpObj = await Task.Run(() => projectService.GetAllProjectAsync());
 
     }
 

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Coursework.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211228073927_DBasdasdsad")]
-    partial class DBasdasdsad
+    [Migration("20211228122152_EADTEst")]
+    partial class EADTEst
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,15 +29,21 @@ namespace Coursework.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("CompanyName")
+                        .IsRequired()
                         .HasMaxLength(55)
                         .HasColumnType("nvarchar(55)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("ProjectType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("TicketsId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .HasMaxLength(55)
-                        .HasColumnType("nvarchar(55)");
 
                     b.HasKey("Id");
 
@@ -58,7 +64,8 @@ namespace Coursework.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<DateTime>("DueDate")
                         .HasColumnType("datetime2");
@@ -67,7 +74,13 @@ namespace Coursework.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Status")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(155)
+                        .HasColumnType("nvarchar(155)");
 
                     b.HasKey("Id");
 
@@ -277,7 +290,7 @@ namespace Coursework.Migrations
             modelBuilder.Entity("Coursework.Data.Project.Project", b =>
                 {
                     b.HasOne("Coursework.Data.Ticket.Ticket", "Tickets")
-                        .WithMany("Projects")
+                        .WithMany()
                         .HasForeignKey("TicketsId");
 
                     b.Navigation("Tickets");
@@ -332,11 +345,6 @@ namespace Coursework.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Coursework.Data.Ticket.Ticket", b =>
-                {
-                    b.Navigation("Projects");
                 });
 #pragma warning restore 612, 618
         }

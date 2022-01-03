@@ -89,7 +89,7 @@ using Coursework.Data;
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/AddTicket/{Id}")]
+    [Microsoft.AspNetCore.Components.RouteAttribute("/AddTicket/{Id}/{ProjectType}")]
     public partial class AddTicket : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
@@ -98,29 +98,36 @@ using Coursework.Data;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 55 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\AddTicket.razor"
+#line 68 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\AddTicket.razor"
        
     [Parameter]
     public String Id { get; set; }
+    [Parameter]
+    public String ProjectType { get; set; }
+
+
 
     DateTime now = DateTime.Now;
+
 
     Coursework.Data.Ticket.Ticket obj = new Coursework.Data.Ticket.Ticket();
     protected override void OnInitialized()
     {
         obj.ProjectId = Id;
         obj.DueDate = now;
+
     }
 
     protected async void CreateEmployee()
     {
-        await ticketService.InsertEmployeeAsync(obj);
-        NavigationManager.NavigateTo($"/Dash/{Id}");
+        await ticketService.InsertTicketAsync(obj);
+        NavigationManager.NavigateTo($"/Dash/{Id}/{ProjectType}");
     }
     void Cancel()
     {
-        NavigationManager.NavigateTo("Dash");
+        NavigationManager.NavigateTo($"/Dash/{Id}/{ProjectType}");
     }
+
 
 #line default
 #line hidden

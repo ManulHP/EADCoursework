@@ -20,7 +20,7 @@ namespace Coursework.Data.Ticket
         #endregion
 
         #region Insert Employee
-        public async Task<bool> InsertEmployeeAsync(Coursework.Data.Ticket.Ticket ticket)
+        public async Task<bool> InsertTicketAsync(Coursework.Data.Ticket.Ticket ticket)
         {
             await _appDBContext.Tickets.AddAsync(ticket);
             await _appDBContext.SaveChangesAsync();
@@ -29,9 +29,13 @@ namespace Coursework.Data.Ticket
         #endregion
 
         #region Get List of Employees
-        public async Task<List<Coursework.Data.Ticket.Ticket>> GetAllEmployeesAsync()
+        public async Task<List<Coursework.Data.Ticket.Ticket>> GetAllTicketAsync()
         {
-            return await _appDBContext.Tickets.ToListAsync();
+            var queryToSelectAllData = await (from pro in _appDBContext.Tickets
+                                              select pro).ToListAsync();
+
+            //return await _appDBContext.Tickets.ToListAsync();
+            return queryToSelectAllData;
         }
         #endregion
 
@@ -45,7 +49,7 @@ namespace Coursework.Data.Ticket
         #endregion
 
         #region Get Employee by Id
-        public async Task<Coursework.Data.Ticket.Ticket> GetEmployeeAsync(int Id)
+        public async Task<Coursework.Data.Ticket.Ticket> GetTicketAsync(int Id)
         {
             Coursework.Data.Ticket.Ticket ticket = await _appDBContext.Tickets.FirstOrDefaultAsync(c => c.Id.Equals(Id));
             return ticket;

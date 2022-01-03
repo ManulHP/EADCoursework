@@ -21,8 +21,7 @@ else
             <h1>WorkSpace</h1>
         </div>
         <div class="col-lg-3 text-right">
-            <a class="btn btn-success btn-sm" href="CreateProject" role="button">Create New</a>
-            <button class="btn btn-success btn-sm" @onclick="MessageBox">Show Message</button>
+            <a class="btn btn-success btn-sm" href="AddProject" role="button">Create New</a>
         </div>
     </div>
 
@@ -32,24 +31,24 @@ else
 
                 <th scope="col">Title</th>
                 <th scope="col">Comapany Name</th>
-                <th scope="col"></th>
+                <th scope="col">Project Type</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var emp in EmpObj)
             {
-                <tr>
+            <tr>
 
-                    <td>@emp.Title</td>
-                    <td>@emp.CompanyName</td>
-                    <td class="text-right">
-                        <a class="btn btn-danger btn-sm" href="Dash/@emp.Id" role="button">View</a>
-                        <a class="btn btn-primary btn-sm" href="EditProject/@emp.Id" role="button">Edit</a>
-                        <a class="btn btn-danger btn-sm" href="DeleteProject/@emp.Id" role="button">Delete</a>
-                        <a class="btn btn-dark btn-sm" href="" role="button">Report</a>
-                        <button type="button" @onclick="PrintReport">Print</button>
-                    </td>
-                </tr>
+                <td>@emp.CompanyName</td>
+                <td>@emp.Description</td>
+                <td>@emp.ProjectType</td>
+                <td class="text-right">
+                    <a class="btn btn-danger btn-sm" href="Dash/@emp.Id/@emp.ProjectType" role="button">View</a>
+                    <a class="btn btn-primary btn-sm" href="EditProject/@emp.Id" role="button">Edit</a>
+                    <a class="btn btn-danger btn-sm" href="DeleteProject/@emp.Id" role="button">Delete</a>
+                </td>
+            </tr>
             }
         </tbody>
     </table>
@@ -111,7 +110,7 @@ else
     List<Coursework.Data.Project.Project> EmpObj;
     protected override async Task OnInitializedAsync()
     {
-        EmpObj = await Task.Run(() => projectService.GetAllEmployeesAsync());
+        EmpObj = await Task.Run(() => projectService.GetAllProjectAsync());
 
     }
 

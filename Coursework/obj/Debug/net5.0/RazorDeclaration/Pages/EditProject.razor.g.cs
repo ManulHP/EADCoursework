@@ -105,11 +105,11 @@ using Coursework.Data;
     Coursework.Data.Project.Project obj = new Coursework.Data.Project.Project();
     protected override async Task OnInitializedAsync()
     {
-        obj = await Task.Run(() => projectService.GetEmployeeAsync(Convert.ToInt32(Id)));
+        obj = await Task.Run(() => projectService.GetProjectByIdAsync(Convert.ToInt32(Id)));
     }
     protected async void UpdateEmployee()
     {
-        await projectService.UpdateEmployeeAsync(obj);
+        await projectService.UpdateTicketeAsync(obj);
         NavigationManager.NavigateTo("");
     }
     void Cancel()

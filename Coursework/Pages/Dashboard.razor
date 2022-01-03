@@ -1,4 +1,4 @@
-﻿@page "/Dash/{Id}"
+﻿@page "/Dash/{Id}/{ProType}"
 @using Coursework.Data
 @inject Coursework.Data.Ticket.TicketService ticketService
 @inject NavigationManager NavigationManager
@@ -8,7 +8,7 @@
 
 
 <button type="button" @onclick="ButtonClick">Add new ticket</button>
-
+<div style="padding-bottom:10px"></div>
 
 
 @if (TicketObj is null)
@@ -17,14 +17,20 @@
 }
 else
 {
-    <table class="table table-borderless table-striped table-sm">
+
+    <table class="table table-borderless table-striped table-fixed">
         <thead class="thead-dark">
             <tr>
-                <th scope="col">New</th>
-                <th scope="col">Assignee</th>
-                <th scope="col">Status</th>
-                <th scope="col">Due Date</th>
-                <th scope="col"></th>
+                <th style="width:550px">Description</th>
+                @{
+                    if (ProType == "Workplace")
+                    {
+                        <th style="width:250px">Assignee</th>
+                    }
+                }
+                <th style="width:150px">Status</th>
+                <th style="width:200px">Due Date</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -32,30 +38,40 @@ else
             {
                 if (emp.Status == "New")
                 {
-                    <tr>
+            <tr>
 
-                        <td>@emp.Description</td>
+                <td>@emp.Description</td>
+                @{
+                    if (ProType == "Workplace")
+                    {
                         <td>@emp.Assignee</td>
-                        <td>@emp.Status</td>
-                        <td>@emp.DueDate</td>
-                        <td class="text-right">
-                            <a class="btn btn-primary btn-sm" href="EditTicket/@emp.Id" role="button">Edit</a>
-                            <a class="btn btn-danger btn-sm" href="DeleteProject/@emp.Id" role="button">Delete</a>
-                        </td>
-                    </tr>
+                    }
+                }
+                <td>@emp.Status</td>
+                <td>@emp.DueDate</td>
+                <td class="text-right">
+                    <a class="btn btn-primary btn-sm" href="EditTicket/@emp.Id" role="button">Edit</a>
+                    <a class="btn btn-danger btn-sm" href="DeleteProject/@emp.Id" role="button">Delete</a>
+                </td>
+            </tr>
                 }
             }
         </tbody>
     </table>
 
-    <table class="table table-borderless table-striped table-sm">
+    <table class="table table-borderless table-striped table-fixed">
         <thead class="thead-dark">
             <tr>
-                <th scope="col">In-progress</th>
-                <th scope="col">Assignee</th>
-                <th scope="col">Status</th>
-                <th scope="col">Due Date</th>
-                <th scope="col"></th>
+                <th style="width:550px">Description</th>
+                @{
+                    if (ProType == "Workplace")
+                    {
+                        <th style="width:250px">Assignee</th>
+                    }
+                }
+                <th style="width:150px">Status</th>
+                <th style="width:200px">Due Date</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -63,31 +79,40 @@ else
             {
                 if (emp.Status == "In-progress")
                 {
-                    <tr>
+            <tr>
 
-                        <td>@emp.Description</td>
-                        <td>@emp.Assignee</td>
-                        <td>@emp.Status</td>
-                        <td>@emp.DueDate</td>
-                        <td class="text-right">
-                            <a class="btn btn-primary btn-sm" href="EditTicket/@emp.Id" role="button">Edit</a>
-                            <a class="btn btn-danger btn-sm" href="DeleteProject/@emp.Id" role="button">Delete</a>
+                <td>@emp.Description</td>
+                @{
+                    if (ProType == "Workplace")
+                    {
+                                <td style="width:250px">@emp.Assignee</td>
+                    }
+                }
+                <td>@emp.Status</td>
+                <td>@emp.DueDate</td>
+                <td class="text-right">
+                    <a class="btn btn-primary btn-sm" href="EditTicket/@emp.Id" role="button">Edit</a>
+                    <a class="btn btn-danger btn-sm" href="DeleteProject/@emp.Id" role="button">Delete</a>
 
-                        </td>
-                    </tr>
+                </td>
+            </tr>
                 }
             }
         </tbody>
     </table>
 
-    <table class="table table-borderless table-striped table-sm">
+    <table class="table table-borderless table-striped table-fixed">
         <thead class="thead-dark">
             <tr>
-                <th scope="col">Closed</th>
-                <th scope="col">Assignee</th>
-                <th scope="col">Status</th>
-                <th scope="col">Due Date</th>
-                <th scope="col"></th>
+                <th style="width:550px">Description</th>
+                @{
+                    if (ProType == "Workplace") { 
+                                <th style="width:250px">Assignee</th>
+                    }
+                }
+                <th style="width:150px">Status</th>
+                <th style="width:200px">Due Date</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -95,18 +120,22 @@ else
             {
                 if (emp.Status == "Closed")
                 {
-                    <tr>
+            <tr>
 
-                        <td>@emp.Description</td>
+                <td>@emp.Description</td>
+                @{
+                    if (ProType == "Workplace")
+                    {
                         <td>@emp.Assignee</td>
-                        <td>@emp.Status</td>
-                        <td>@emp.DueDate</td>
-                        <td class="text-right">
-                            <a class="btn btn-primary btn-sm" href="EditTicket/@emp.Id" role="button">Edit</a>
-                            <a class="btn btn-danger btn-sm" href="DeleteProject/@emp.Id" role="button">Delete</a>
-
-                        </td>
-                    </tr>
+                    }
+                }
+                <td>@emp.Status</td>
+                <td>@emp.DueDate</td>
+                <td class="text-right">
+                    <a class="btn btn-primary btn-sm" href="EditTicket/@emp.Id" role="button">Edit</a>
+                    <a class="btn btn-danger btn-sm" href="DeleteProject/@emp.Id" role="button">Delete</a>
+                </td>
+            </tr>
                 }
             }
         </tbody>
@@ -118,9 +147,11 @@ else
 @code {
     [Parameter]
     public String Id { get; set; }
+    [Parameter]
+    public String ProType { get; set; }
 
     List<Coursework.Data.Ticket.Ticket> TicketObj;
-    private Coursework.Data.Ticket.Ticket[] TicketArray;
+
 
 
     Coursework.Data.Ticket.Ticket obj = new Coursework.Data.Ticket.Ticket();
@@ -128,14 +159,14 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        EmpObj = await Task.Run(() => ticketService.GetAllEmployeesAsync());
+        EmpObj = await Task.Run(() => ticketService.GetAllTicketAsync());
         //get ticket by id
         TicketObj = EmpObj.Where(x => x.ProjectId.Contains(Id)).ToList();
-        TicketArray = TicketObj.ToArray();
+       
     }
 
     protected async void ButtonClick()
     {
-        NavigationManager.NavigateTo($"/AddTicket/{Id}");
+        NavigationManager.NavigateTo($"/AddTicket/{Id}/{ProType}");
     }
 }

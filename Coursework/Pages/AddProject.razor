@@ -12,12 +12,22 @@
         <div class="col-md-8">
             <div class="form-group">
                 <label for="Title" class="control-label">Title</label>
-                <input form="Title" class="form-control" @bind="@obj.Title" />
+                <input form="Title" class="form-control" @bind="@obj.CompanyName" />
             </div>
 
             <div class="form-group">
                 <label for="CompanyName" class="control-label">Company Name</label>
-                <input form="CompanyName" class="form-control" @bind="@obj.CompanyName" />
+                <input form="CompanyName" class="form-control" @bind="@obj.Description" />
+            </div>
+
+            <div class="form-group">
+                <label for="City" class="control-label">Status</label>
+                <select @bind="@obj.ProjectType" class="form-control">
+                    <option value="0" selected></option>
+                    <option value="Workplace">Workplace</option>
+                    <option value="Individual">Individual</option>
+                  
+                </select>
             </div>
 
         </div>
@@ -39,8 +49,8 @@
     Coursework.Data.Project.Project obj = new Coursework.Data.Project.Project();
     protected async void CreateEmployee()
     {
-        await projectService.InsertEmployeeAsync(obj);
-        NavigationManager.NavigateTo($"/Dash/{obj.Id}");
+        await projectService.InsertProjectAsync(obj);
+        NavigationManager.NavigateTo($"/Dash/{obj.Id}/{obj.ProjectType}");
     }
     void Cancel()
     {

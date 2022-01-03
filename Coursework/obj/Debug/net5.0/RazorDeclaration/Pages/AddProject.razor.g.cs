@@ -98,15 +98,15 @@ using Coursework.Data;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 36 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\AddProject.razor"
+#line 46 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\AddProject.razor"
        
   
 
     Coursework.Data.Project.Project obj = new Coursework.Data.Project.Project();
     protected async void CreateEmployee()
     {
-        await projectService.InsertEmployeeAsync(obj);
-        NavigationManager.NavigateTo($"/Dash/{obj.Id}");
+        await projectService.InsertProjectAsync(obj);
+        NavigationManager.NavigateTo($"/Dash/{obj.Id}/{obj.ProjectType}");
     }
     void Cancel()
     {

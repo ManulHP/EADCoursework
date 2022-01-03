@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Coursework.Migrations
 {
-    public partial class DBasdasdsad : Migration
+    public partial class EADTEst : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -52,9 +52,10 @@ namespace Coursework.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(155)", maxLength: 155, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
                     Assignee = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DueDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ProjectId = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -175,8 +176,9 @@ namespace Coursework.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(55)", maxLength: 55, nullable: true),
-                    CompanyName = table.Column<string>(type: "nvarchar(55)", maxLength: 55, nullable: true),
+                    CompanyName = table.Column<string>(type: "nvarchar(55)", maxLength: 55, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    ProjectType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TicketsId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>

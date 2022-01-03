@@ -96,7 +96,7 @@ using System.IO;
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/Dash/{Id}")]
+    [Microsoft.AspNetCore.Components.RouteAttribute("/Dash/{Id}/{ProType}")]
     public partial class Dashboard : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
@@ -105,13 +105,15 @@ using System.IO;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 118 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\Dashboard.razor"
+#line 147 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\Dashboard.razor"
        
     [Parameter]
     public String Id { get; set; }
+    [Parameter]
+    public String ProType { get; set; }
 
     List<Coursework.Data.Ticket.Ticket> TicketObj;
-    private Coursework.Data.Ticket.Ticket[] TicketArray;
+
 
 
     Coursework.Data.Ticket.Ticket obj = new Coursework.Data.Ticket.Ticket();
@@ -119,15 +121,15 @@ using System.IO;
 
     protected override async Task OnInitializedAsync()
     {
-        EmpObj = await Task.Run(() => ticketService.GetAllEmployeesAsync());
+        EmpObj = await Task.Run(() => ticketService.GetAllTicketAsync());
         //get ticket by id
         TicketObj = EmpObj.Where(x => x.ProjectId.Contains(Id)).ToList();
-        TicketArray = TicketObj.ToArray();
+       
     }
 
     protected async void ButtonClick()
     {
-        NavigationManager.NavigateTo($"/AddTicket/{Id}");
+        NavigationManager.NavigateTo($"/AddTicket/{Id}/{ProType}");
     }
 
 #line default
