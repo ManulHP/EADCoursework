@@ -89,7 +89,7 @@ using Coursework.Data;
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/EditTicket/{Id}")]
+    [Microsoft.AspNetCore.Components.RouteAttribute("/EditTicket/{Id}/{ProjectType}")]
     public partial class EditTicket : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
@@ -98,10 +98,13 @@ using Coursework.Data;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 61 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\EditTicket.razor"
+#line 63 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\EditTicket.razor"
        
     [Parameter]
     public String Id { get; set; }
+    [Parameter]
+    public String ProjectType { get; set; }
+
     Coursework.Data.Ticket.Ticket obj = new Coursework.Data.Ticket.Ticket();
     protected override async Task OnInitializedAsync()
     {
@@ -110,7 +113,7 @@ using Coursework.Data;
     protected async void UpdateEmployee()
     {
         await ticketService.UpdateTicket(obj);
-        NavigationManager.NavigateTo($"/Dash/{obj.ProjectId}");
+        NavigationManager.NavigateTo($"/Dash/{obj.ProjectId}/{ProjectType}");
     }
     void Cancel()
     {

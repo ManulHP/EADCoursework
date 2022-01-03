@@ -16,11 +16,13 @@ namespace Coursework.Data.Project
         public String CompanyName { get; set; }
         [Required]
         [StringLength(255)]
+        public String Title { get; set; }
+        [StringLength(255)]
         public String Description { get; set; }
         [Required]
         public String ProjectType { get; set; }
 
-        public Coursework.Data.Ticket.Ticket Tickets { get; set; }
+        //public Coursework.Data.Ticket.Ticket Tickets { get; set; }
 
     }
 }

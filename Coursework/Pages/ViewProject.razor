@@ -29,9 +29,10 @@ else
         <thead class="thead-dark">
             <tr>
 
-                <th scope="col">Title</th>
-                <th scope="col">Comapany Name</th>
-                <th scope="col">Project Type</th>
+                <th style="width:100px">Title</th>
+                <th style="width:200px">Comapany Name</th>
+                <th style="width:800px">Description</th>
+                <th style="width:200px">Project Type</th>
                 <th></th>
             </tr>
         </thead>
@@ -39,7 +40,7 @@ else
             @foreach (var emp in EmpObj)
             {
             <tr>
-
+                <td>@emp.Title</td>
                 <td>@emp.CompanyName</td>
                 <td>@emp.Description</td>
                 <td>@emp.ProjectType</td>

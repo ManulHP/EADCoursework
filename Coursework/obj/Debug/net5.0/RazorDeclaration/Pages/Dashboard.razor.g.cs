@@ -105,7 +105,7 @@ using System.IO;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 147 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\Dashboard.razor"
+#line 146 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\Dashboard.razor"
        
     [Parameter]
     public String Id { get; set; }
@@ -124,7 +124,7 @@ using System.IO;
         EmpObj = await Task.Run(() => ticketService.GetAllTicketAsync());
         //get ticket by id
         TicketObj = EmpObj.Where(x => x.ProjectId.Contains(Id)).ToList();
-       
+
     }
 
     protected async void ButtonClick()

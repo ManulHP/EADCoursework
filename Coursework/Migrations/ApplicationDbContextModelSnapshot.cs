@@ -32,7 +32,6 @@ namespace Coursework.Migrations
                         .HasColumnType("nvarchar(55)");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -40,12 +39,12 @@ namespace Coursework.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TicketsId")
-                        .HasColumnType("int");
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TicketsId");
 
                     b.ToTable("Projects");
                 });
@@ -283,15 +282,6 @@ namespace Coursework.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("Coursework.Data.Project.Project", b =>
-                {
-                    b.HasOne("Coursework.Data.Ticket.Ticket", "Tickets")
-                        .WithMany()
-                        .HasForeignKey("TicketsId");
-
-                    b.Navigation("Tickets");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -6,7 +6,6 @@
 @using  System.IO;
 
 
-
 <button type="button" @onclick="ButtonClick">Add new ticket</button>
 <div style="padding-bottom:10px"></div>
 
@@ -50,7 +49,7 @@ else
                 <td>@emp.Status</td>
                 <td>@emp.DueDate</td>
                 <td class="text-right">
-                    <a class="btn btn-primary btn-sm" href="EditTicket/@emp.Id" role="button">Edit</a>
+                    <a class="btn btn-primary btn-sm" href="EditTicket/@emp.Id/@ProType" role="button">Edit</a>
                     <a class="btn btn-danger btn-sm" href="DeleteProject/@emp.Id" role="button">Delete</a>
                 </td>
             </tr>
@@ -91,7 +90,7 @@ else
                 <td>@emp.Status</td>
                 <td>@emp.DueDate</td>
                 <td class="text-right">
-                    <a class="btn btn-primary btn-sm" href="EditTicket/@emp.Id" role="button">Edit</a>
+                    <a class="btn btn-primary btn-sm" href="EditTicket/@emp.Id/@ProType" role="button">Edit</a>
                     <a class="btn btn-danger btn-sm" href="DeleteProject/@emp.Id" role="button">Delete</a>
 
                 </td>
@@ -132,7 +131,7 @@ else
                 <td>@emp.Status</td>
                 <td>@emp.DueDate</td>
                 <td class="text-right">
-                    <a class="btn btn-primary btn-sm" href="EditTicket/@emp.Id" role="button">Edit</a>
+                    <a class="btn btn-primary btn-sm" href="EditTicket/@emp.Id/@ProType" role="button">Edit</a>
                     <a class="btn btn-danger btn-sm" href="DeleteProject/@emp.Id" role="button">Delete</a>
                 </td>
             </tr>
@@ -162,7 +161,7 @@ else
         EmpObj = await Task.Run(() => ticketService.GetAllTicketAsync());
         //get ticket by id
         TicketObj = EmpObj.Where(x => x.ProjectId.Contains(Id)).ToList();
-       
+
     }
 
     protected async void ButtonClick()
