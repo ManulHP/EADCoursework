@@ -98,7 +98,7 @@ using Coursework.Data;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 39 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\DeleteProject.razor"
+#line 43 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\DeleteProject.razor"
        
     [Parameter]
     public String Id { get; set; }
@@ -110,11 +110,11 @@ using Coursework.Data;
     protected async void DeleteEmployee()
     {
         await projectService.DeleteTicketAsync(obj);
-        NavigationManager.NavigateTo("");
+        NavigationManager.NavigateTo("ViewPorject");
     }
     void Cancel()
     {
-        NavigationManager.NavigateTo("");
+        NavigationManager.NavigateTo("ViewPorject");
     }
 
 #line default

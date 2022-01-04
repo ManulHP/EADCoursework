@@ -63,21 +63,8 @@
         Coursework.Data.Project.Project obj = new Coursework.Data.Project.Project();
         protected async void CreateProject()
         {
-            if (obj.CompanyName == "")
-            {
-                throw new InvalidOperationException("Please enter a title");
-            }
-            else if (obj.ProjectType == "")
-            {
-                throw new InvalidOperationException("Please select a project type");
-            }
-            else
-            {
-                await projectService.InsertProjectAsync(obj);
-                NavigationManager.NavigateTo($"/Dash/{obj.Id}/{obj.ProjectType}");
-            }
-
-
+            await projectService.InsertProjectAsync(obj);
+            NavigationManager.NavigateTo($"/Dash/{obj.Id}/{obj.ProjectType}");
 
         }
         void Cancel()

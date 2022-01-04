@@ -98,7 +98,7 @@ using Coursework.Data;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 38 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\EditProject.razor"
+#line 48 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\EditProject.razor"
        
     [Parameter]
     public String Id { get; set; }
@@ -110,11 +110,11 @@ using Coursework.Data;
     protected async void UpdateEmployee()
     {
         await projectService.UpdateTicketeAsync(obj);
-        NavigationManager.NavigateTo("");
+        NavigationManager.NavigateTo("ViewPorject");
     }
     void Cancel()
     {
-        NavigationManager.NavigateTo("");
+        NavigationManager.NavigateTo("ViewPorject");
     }
 
 #line default

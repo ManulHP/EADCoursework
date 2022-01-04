@@ -19,7 +19,7 @@ namespace Coursework.Data.Ticket
         }
         #endregion
 
-        #region Insert Employee
+        #region Insert Ticket
         public async Task<bool> InsertTicketAsync(Coursework.Data.Ticket.Ticket ticket)
         {
             await _appDBContext.Tickets.AddAsync(ticket);
@@ -28,7 +28,7 @@ namespace Coursework.Data.Ticket
         }
         #endregion
 
-        #region Get List of Employees
+        #region Get List of Ticket
         public async Task<List<Coursework.Data.Ticket.Ticket>> GetAllTicketAsync()
         {
             var queryToSelectAllData = await (from pro in _appDBContext.Tickets
@@ -39,7 +39,7 @@ namespace Coursework.Data.Ticket
         }
         #endregion
 
-        #region Update Employee
+        #region Update Ticket
         public async Task<bool> UpdateTicket(Coursework.Data.Ticket.Ticket ticket)
         {
             _appDBContext.Tickets.Update(ticket);
@@ -48,7 +48,7 @@ namespace Coursework.Data.Ticket
         }
         #endregion
 
-        #region Get Employee by Id
+        #region Get Ticket by Id
         public async Task<Coursework.Data.Ticket.Ticket> GetTicketAsync(int Id)
         {
             Coursework.Data.Ticket.Ticket ticket = await _appDBContext.Tickets.FirstOrDefaultAsync(c => c.Id.Equals(Id));
@@ -56,16 +56,7 @@ namespace Coursework.Data.Ticket
         }
         #endregion
 
-        public async Task<Coursework.Data.Ticket.Ticket[]> GetTicketsAsync()
-        {
-            return await _appDBContext.Tickets.ToArrayAsync();
-        }
-
-        public async Task<Coursework.Data.Ticket.Ticket[]> GetProjectsAsync()
-        {
-            return await _appDBContext.Tickets.ToArrayAsync();
-        }
-
+        #region Get ticket by project id
         public async Task<List<Coursework.Data.Ticket.Ticket>> GetTicketByProjectIdAsync(String Id)
         {
            
@@ -76,7 +67,9 @@ namespace Coursework.Data.Ticket
                 ).ToListAsync();
             return queryProjectId;
         }
+        #endregion
 
+        #region Get ticket by project id(Array)
         public async Task<Coursework.Data.Ticket.Ticket[]> GetTicketByProjectIdReportAsync(String Id)
         {
 
@@ -87,8 +80,9 @@ namespace Coursework.Data.Ticket
                 ).ToArrayAsync();
             return queryProjectId;
         }
+        #endregion
 
-        #region DeleteEmployee
+        #region Delete ticket
         public async Task<bool> DeleteTicketAsync(Coursework.Data.Ticket.Ticket ticket)
         {
             _appDBContext.Remove(ticket);

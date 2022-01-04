@@ -20,7 +20,7 @@ namespace Coursework.Data.Project
         }
         #endregion
 
-        #region Get List of Employees
+        #region Get List of Project
         public async Task<List<Coursework.Data.Project.Project>> GetAllProjectAsync()
         {
             var queryToSelectAllData = await (from pro in _appDBContext.Projects
@@ -32,7 +32,7 @@ namespace Coursework.Data.Project
         }
         #endregion
 
-        #region Insert Employee
+        #region Insert Project
         public async Task<bool> InsertProjectAsync(Coursework.Data.Project.Project project)
         {
             await _appDBContext.Projects.AddAsync(project);
@@ -41,7 +41,7 @@ namespace Coursework.Data.Project
         }
         #endregion
 
-        #region Update Employee
+        #region Update Project
         public async Task<bool> UpdateTicketeAsync(Coursework.Data.Project.Project project)
         {
             _appDBContext.Projects.Update(project);
@@ -50,7 +50,7 @@ namespace Coursework.Data.Project
         }
         #endregion
 
-        #region Get Employee by Id
+        #region Get Project by Id
         public async Task<Coursework.Data.Project.Project> GetProjectByIdAsync(int Id)
         {
             Coursework.Data.Project.Project project = await _appDBContext.Projects.FirstOrDefaultAsync(c => c.Id.Equals(Id));
@@ -58,7 +58,7 @@ namespace Coursework.Data.Project
         }
         #endregion
 
-        #region DeleteEmployee
+        #region Delete ticket
         public async Task<bool> DeleteTicketAsync(Coursework.Data.Project.Project project)
         {
             _appDBContext.Remove(project);
