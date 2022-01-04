@@ -105,36 +105,43 @@ using System.IO;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 146 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\Dashboard.razor"
-       
-    [Parameter]
-    public String Id { get; set; }
-    [Parameter]
-    public String ProType { get; set; }
+#line 159 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\Dashboard.razor"
+               
+            [Parameter]
+            public String Id { get; set; }
+            [Parameter]
+            public String ProType { get; set; }
 
-    List<Coursework.Data.Ticket.Ticket> TicketObj;
+            List<Coursework.Data.Ticket.Ticket> TicketObj;
+            private Coursework.Data.Ticket.Ticket[] TicketsArray;
+
+            protected override async Task OnInitializedAsync()
+            {
+                TicketObj = await Task.Run(() => ticketService.GetTicketByProjectIdAsync(Id)); ;
+                TicketsArray = await Task.Run(() => ticketService.GetTicketByProjectIdReportAsync(Id));
+            }
 
 
+            protected async void ButtonClick()
+            {
+                NavigationManager.NavigateTo($"/AddTicket/{Id}/{ProType}");
+            }
 
-    Coursework.Data.Ticket.Ticket obj = new Coursework.Data.Ticket.Ticket();
-    List<Coursework.Data.Ticket.Ticket> EmpObj;
+            protected async Task ExportToPdf()
+            {
+                using (MemoryStream excelStream = exportService.CreatePdf(TicketsArray))
+                {
+                    await JS.SaveAs("Sample.pdf", excelStream.ToArray());
+                }
+            }
 
-    protected override async Task OnInitializedAsync()
-    {
-        EmpObj = await Task.Run(() => ticketService.GetAllTicketAsync());
-        //get ticket by id
-        TicketObj = EmpObj.Where(x => x.ProjectId.Contains(Id)).ToList();
-
-    }
-
-    protected async void ButtonClick()
-    {
-        NavigationManager.NavigateTo($"/AddTicket/{Id}/{ProType}");
-    }
+        
 
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private Coursework.Data.Project.ProjectService projectService { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private ExportService exportService { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private Microsoft.JSInterop.IJSRuntime JS { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private Coursework.Data.Ticket.TicketService ticketService { get; set; }

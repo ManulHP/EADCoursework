@@ -214,3 +214,5 @@ C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursew
 C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\bin\Debug\net5.0\Microsoft.JSInterop.WebAssembly.dll
 C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\obj\Debug\net5.0\RazorDeclaration\Pages\Report.razor.g.cs
 C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\obj\Debug\net5.0\Razor\Pages\Report.razor.g.cs
+C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\obj\Debug\net5.0\RazorDeclaration\Pages\DeleteTicket.razor.g.cs
+C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\obj\Debug\net5.0\Razor\Pages\DeleteTicket.razor.g.cs

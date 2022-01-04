@@ -60,5 +60,42 @@ namespace Coursework.Data.Ticket
         {
             return await _appDBContext.Tickets.ToArrayAsync();
         }
+
+        public async Task<Coursework.Data.Ticket.Ticket[]> GetProjectsAsync()
+        {
+            return await _appDBContext.Tickets.ToArrayAsync();
+        }
+
+        public async Task<List<Coursework.Data.Ticket.Ticket>> GetTicketByProjectIdAsync(String Id)
+        {
+           
+            var queryProjectId = await (
+               from ticket in _appDBContext.Tickets
+               where ticket.ProjectId == Id
+               select ticket
+                ).ToListAsync();
+            return queryProjectId;
+        }
+
+        public async Task<Coursework.Data.Ticket.Ticket[]> GetTicketByProjectIdReportAsync(String Id)
+        {
+
+            var queryProjectId = await (
+               from ticket in _appDBContext.Tickets
+               where ticket.ProjectId == Id
+               select ticket
+                ).ToArrayAsync();
+            return queryProjectId;
+        }
+
+        #region DeleteEmployee
+        public async Task<bool> DeleteTicketAsync(Coursework.Data.Ticket.Ticket ticket)
+        {
+            _appDBContext.Remove(ticket);
+            await _appDBContext.SaveChangesAsync();
+            return true;
+        }
+        #endregion
+
     }
 }

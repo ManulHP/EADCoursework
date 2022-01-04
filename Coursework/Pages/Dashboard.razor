@@ -4,9 +4,20 @@
 @inject NavigationManager NavigationManager
 @inject Microsoft.JSInterop.IJSRuntime JS
 @using  System.IO;
+@inject ExportService exportService
+@inject Coursework.Data.Project.ProjectService projectService
 
+<AuthorizeView>
+    <Authorized>
+        <button class="btn btn-primary" type="button" @onclick="ButtonClick">Add new ticket</button>
+        <button class="btn btn-primary" type="button" @onclick="ExportToPdf">Export Date</button>
+    </Authorized>
+    <NotAuthorized>
+        <a class="btn btn-primary" href="Identity/Account/Register">Register</a>
+        <a class="btn btn-primary" href="Identity/Account/Login">Log in</a>
+    </NotAuthorized>
+</AuthorizeView>
 
-<button type="button" @onclick="ButtonClick">Add new ticket</button>
 <div style="padding-bottom:10px"></div>
 
 
@@ -37,22 +48,22 @@ else
             {
                 if (emp.Status == "New")
                 {
-            <tr>
+                    <tr>
 
-                <td>@emp.Description</td>
-                @{
-                    if (ProType == "Workplace")
-                    {
-                        <td>@emp.Assignee</td>
-                    }
-                }
-                <td>@emp.Status</td>
-                <td>@emp.DueDate</td>
-                <td class="text-right">
-                    <a class="btn btn-primary btn-sm" href="EditTicket/@emp.Id/@ProType" role="button">Edit</a>
-                    <a class="btn btn-danger btn-sm" href="DeleteProject/@emp.Id" role="button">Delete</a>
-                </td>
-            </tr>
+                        <td>@emp.Description</td>
+                        @{
+                            if (ProType == "Workplace")
+                            {
+                                <td>@emp.Assignee</td>
+                            }
+                        }
+                        <td>@emp.Status</td>
+                        <td>@emp.DueDate</td>
+                        <td class="text-right">
+                            <a class="btn btn-primary btn-sm" href="EditTicket/@emp.Id/@ProType" role="button">Edit</a>
+                            <a class="btn btn-danger btn-sm" href="DeleteTicket/@emp.Id/@ProType" role="button">Delete</a>
+                        </td>
+                    </tr>
                 }
             }
         </tbody>
@@ -78,23 +89,22 @@ else
             {
                 if (emp.Status == "In-progress")
                 {
-            <tr>
+                    <tr>
 
-                <td>@emp.Description</td>
-                @{
-                    if (ProType == "Workplace")
-                    {
+                        <td>@emp.Description</td>
+                        @{
+                            if (ProType == "Workplace")
+                            {
                                 <td style="width:250px">@emp.Assignee</td>
-                    }
-                }
-                <td>@emp.Status</td>
-                <td>@emp.DueDate</td>
-                <td class="text-right">
-                    <a class="btn btn-primary btn-sm" href="EditTicket/@emp.Id/@ProType" role="button">Edit</a>
-                    <a class="btn btn-danger btn-sm" href="DeleteProject/@emp.Id" role="button">Delete</a>
-
-                </td>
-            </tr>
+                            }
+                        }
+                        <td>@emp.Status</td>
+                        <td>@emp.DueDate</td>
+                        <td class="text-right">
+                            <a class="btn btn-primary btn-sm" href="EditTicket/@emp.Id/@ProType" role="button">Edit</a>
+                            <a class="btn btn-danger btn-sm" href="DeleteTicket/@emp.Id/@ProType" role="button">Delete</a>
+                        </td>
+                    </tr>
                 }
             }
         </tbody>
@@ -105,8 +115,9 @@ else
             <tr>
                 <th style="width:550px">Description</th>
                 @{
-                    if (ProType == "Workplace") { 
-                                <th style="width:250px">Assignee</th>
+                    if (ProType == "Workplace")
+                    {
+                        <th style="width:250px">Assignee</th>
                     }
                 }
                 <th style="width:150px">Status</th>
@@ -119,53 +130,59 @@ else
             {
                 if (emp.Status == "Closed")
                 {
-            <tr>
+                    <tr>
 
-                <td>@emp.Description</td>
-                @{
-                    if (ProType == "Workplace")
-                    {
-                        <td>@emp.Assignee</td>
-                    }
-                }
-                <td>@emp.Status</td>
-                <td>@emp.DueDate</td>
-                <td class="text-right">
-                    <a class="btn btn-primary btn-sm" href="EditTicket/@emp.Id/@ProType" role="button">Edit</a>
-                    <a class="btn btn-danger btn-sm" href="DeleteProject/@emp.Id" role="button">Delete</a>
-                </td>
-            </tr>
+                        <td>@emp.Description</td>
+                        @{
+                            if (ProType == "Workplace")
+                            {
+                                <td>@emp.Assignee</td>
+                            }
+                        }
+                        <td>@emp.Status</td>
+                        <td>@emp.DueDate</td>
+                        <td class="text-right">
+                            <a class="btn btn-primary btn-sm" href="EditTicket/@emp.Id/@ProType" role="button">Edit</a>
+                            <a class="btn btn-danger btn-sm" href="DeleteTicket/@emp.Id/@ProType" role="button">Delete</a>
+                        </td>
+                    </tr>
                 }
             }
         </tbody>
     </table>
-}
+
+
+        }
 
 
 
-@code {
-    [Parameter]
-    public String Id { get; set; }
-    [Parameter]
-    public String ProType { get; set; }
+        @code {
+            [Parameter]
+            public String Id { get; set; }
+            [Parameter]
+            public String ProType { get; set; }
 
-    List<Coursework.Data.Ticket.Ticket> TicketObj;
+            List<Coursework.Data.Ticket.Ticket> TicketObj;
+            private Coursework.Data.Ticket.Ticket[] TicketsArray;
+
+            protected override async Task OnInitializedAsync()
+            {
+                TicketObj = await Task.Run(() => ticketService.GetTicketByProjectIdAsync(Id)); ;
+                TicketsArray = await Task.Run(() => ticketService.GetTicketByProjectIdReportAsync(Id));
+            }
 
 
+            protected async void ButtonClick()
+            {
+                NavigationManager.NavigateTo($"/AddTicket/{Id}/{ProType}");
+            }
 
-    Coursework.Data.Ticket.Ticket obj = new Coursework.Data.Ticket.Ticket();
-    List<Coursework.Data.Ticket.Ticket> EmpObj;
+            protected async Task ExportToPdf()
+            {
+                using (MemoryStream excelStream = exportService.CreatePdf(TicketsArray))
+                {
+                    await JS.SaveAs("Sample.pdf", excelStream.ToArray());
+                }
+            }
 
-    protected override async Task OnInitializedAsync()
-    {
-        EmpObj = await Task.Run(() => ticketService.GetAllTicketAsync());
-        //get ticket by id
-        TicketObj = EmpObj.Where(x => x.ProjectId.Contains(Id)).ToList();
-
-    }
-
-    protected async void ButtonClick()
-    {
-        NavigationManager.NavigateTo($"/AddTicket/{Id}/{ProType}");
-    }
-}
+        }

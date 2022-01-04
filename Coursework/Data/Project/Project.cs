@@ -11,11 +11,11 @@ namespace Coursework.Data.Project
     {
         [Key]
         public Int32 Id { get; set; }
-        [Required]
-        [StringLength(55)]
+        [Required(ErrorMessage = "Enter a company name")]
+        [StringLength(55, ErrorMessage = "That name is too long")]
         public String CompanyName { get; set; }
-        [Required]
-        [StringLength(255)]
+        [Required(ErrorMessage ="Enter a titel for the project")]
+        [StringLength(255, ErrorMessage ="Exceeded the work count")]
         public String Title { get; set; }
         [StringLength(255)]
         public String Description { get; set; }

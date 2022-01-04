@@ -67,9 +67,11 @@ namespace Coursework.Data.Project
         }
         #endregion
 
-        public async Task<Coursework.Data.Project.Project[]> GetProjectsAsync()
+        public async Task<List<Coursework.Data.Project.Project>> GetProjectAsync(int Id)
         {
-            return await _appDBContext.Projects.ToArrayAsync();
+            //Coursework.Data.Ticket.Ticket ticket = await _appDBContext.Tickets.FirstOrDefaultAsync(c => c.Id.Equals(Id));
+            var queryIdProject = await (from pro in _appDBContext.Projects where pro.Id == Id select pro).ToListAsync();
+            return queryIdProject;
         }
 
     }

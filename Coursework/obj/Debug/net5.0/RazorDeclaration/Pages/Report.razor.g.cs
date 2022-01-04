@@ -82,21 +82,6 @@ using Coursework.Shared;
 #line default
 #line hidden
 #nullable disable
-#nullable restore
-#line 2 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\Report.razor"
-using Coursework.Data;
-
-#line default
-#line hidden
-#nullable disable
-#nullable restore
-#line 8 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\Report.razor"
-using System.IO;
-
-#line default
-#line hidden
-#nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/Report")]
     public partial class Report : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
@@ -104,32 +89,6 @@ using System.IO;
         {
         }
         #pragma warning restore 1998
-#nullable restore
-#line 27 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\Report.razor"
-       
-    
-    private Coursework.Data.Project.Project[] ProObj;
-
-            protected override async Task OnInitializedAsync()
-            {
-                ProObj = await Task.Run(() => projectService.GetProjectsAsync());
-            }
-
-            protected async Task ExportToPdf()
-            {
-                using (MemoryStream excelStream = exportService.CreatePdf(ProObj))
-                {
-                    await JS.SaveAs("Sample.pdf", excelStream.ToArray());
-                }
-            } 
-    
-
-#line default
-#line hidden
-#nullable disable
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private Microsoft.JSInterop.IJSRuntime JS { get; set; }
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private ExportService exportService { get; set; }
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private Coursework.Data.Project.ProjectService projectService { get; set; }
     }
 }
 #pragma warning restore 1591

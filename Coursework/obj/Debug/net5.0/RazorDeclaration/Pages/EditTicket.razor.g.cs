@@ -117,7 +117,7 @@ using Coursework.Data;
     }
     void Cancel()
     {
-        NavigationManager.NavigateTo("");
+        NavigationManager.NavigateTo($"/Dash/{obj.ProjectId}/{ProjectType}");
     }
 
 #line default

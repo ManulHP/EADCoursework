@@ -1,4 +1,4 @@
-﻿@page "/Report"
+﻿@*@page "/Report"
 @using Coursework.Data
 @inject Coursework.Data.Project.ProjectService projectService
 
@@ -25,19 +25,21 @@
 
 
 @code {
-    
+
     private Coursework.Data.Project.Project[] ProObj;
+    private Coursework.Data.Ticket.Ticket[] TicketObj;
 
-            protected override async Task OnInitializedAsync()
-            {
-                ProObj = await Task.Run(() => projectService.GetProjectsAsync());
-            }
-
-            protected async Task ExportToPdf()
-            {
-                using (MemoryStream excelStream = exportService.CreatePdf(ProObj))
-                {
-                    await JS.SaveAs("Sample.pdf", excelStream.ToArray());
-                }
-            } 
+    protected override async Task OnInitializedAsync()
+    {
+        //ProObj = await Task.Run(() => projectService.GetProjectsAsync());
+        TicketObj = await Task.Run(() => projectService.GetProjectsAsync());
     }
+
+    protected async Task ExportToPdf()
+    {
+        using (MemoryStream excelStream = exportService.CreatePdf(TicketObj))
+        {
+            await JS.SaveAs("Sample.pdf", excelStream.ToArray());
+        }
+    }
+    }*@

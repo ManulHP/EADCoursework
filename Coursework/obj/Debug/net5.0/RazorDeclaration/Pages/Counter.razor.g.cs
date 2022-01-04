@@ -98,6 +98,11 @@ using Coursework.Shared;
     private void IncrementCount()
     {
         currentCount++;
+
+        if (currentCount > 5)
+        {
+            throw new InvalidOperationException("Current count is too big!");
+        }
     }
 
 #line default

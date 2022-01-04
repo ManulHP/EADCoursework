@@ -1,0 +1,66 @@
+﻿@page "/DeleteTicket/{Id}/{ProjectType}"
+@using Coursework.Data
+@inject Coursework.Data.Ticket.TicketService ticketService
+@inject NavigationManager NavigationManager
+
+<h2>Delete Ticket</h2>
+<hr />
+
+<h3>Are you sure want to delete this?</h3>
+<form>
+    <div class="row">
+        <div class=" col-md-8">
+            <div class="form-group">
+                <label>Id:</label>
+                <label>@obj.Id</label>
+            </div>
+            <div class="form-group">
+                <label>Title:</label>
+                <label>@obj.Title</label>
+            </div>
+            <div class="form-group">
+                <label>Description:</label>
+                <label>@obj.Description</label>
+            </div>
+            <div class="form-group">
+                <label>Status:</label>
+                <label>@obj.Status</label>
+            </div>
+            <div class="form-group">
+                <label>Due Date:</label>
+                <label>@obj.DueDate</label>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <input type="button" class="btn btn-danger" @onclick="@DeleteEmployee" value="Delete" />
+                <input type="button" class="btn btn-primary" @onclick="@Cancel" value="Cancel" />
+            </div>
+        </div>
+    </div>
+</form>
+
+@code {
+    [Parameter]
+    public String Id { get; set; }
+    [Parameter]
+    public String ProjectType { get; set; }
+
+    Coursework.Data.Ticket.Ticket obj = new Coursework.Data.Ticket.Ticket();
+    protected override async Task OnInitializedAsync()
+    {
+        obj = await Task.Run(() => ticketService.GetTicketAsync(Convert.ToInt32(Id)));
+    }
+    protected async void DeleteEmployee()
+    {
+        await ticketService.DeleteTicketAsync(obj);
+        NavigationManager.NavigateTo($"/Dash/{obj.ProjectId}/{ProjectType}");
+    }
+    void Cancel()
+    {
+        NavigationManager.NavigateTo($"/Dash/{obj.ProjectId}/{ProjectType}");
+    }
+}

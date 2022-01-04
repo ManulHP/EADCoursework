@@ -3,6 +3,7 @@
 @inject Coursework.Data.Project.ProjectService projectService
 @inject NavigationManager NavigationManager
 
+
     <AuthorizeView>
         <Authorized>
             <h2>Add Project</h2>
@@ -42,7 +43,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <input type="button" class="btn btn-primary" @onclick="@CreateEmployee" value="Save" />
+                            <input type="button" class="btn btn-primary" @onclick="@CreateProject" value="Save" />
                             <input type="button" class="btn btn-primary" @onclick="@Cancel" value="Cancel" />
                         </div>
                     </div>
@@ -56,19 +57,33 @@
     </AuthorizeView>
 
 
-@code {
-  
+    @code {
 
-    Coursework.Data.Project.Project obj = new Coursework.Data.Project.Project();
-    protected async void CreateEmployee()
-    {
-        await projectService.InsertProjectAsync(obj);
-        NavigationManager.NavigateTo($"/Dash/{obj.Id}/{obj.ProjectType}");
-    }
-    void Cancel()
-    {
-        NavigationManager.NavigateTo("");
-    }
 
-  
-}
+        Coursework.Data.Project.Project obj = new Coursework.Data.Project.Project();
+        protected async void CreateProject()
+        {
+            if (obj.CompanyName == "")
+            {
+                throw new InvalidOperationException("Please enter a title");
+            }
+            else if (obj.ProjectType == "")
+            {
+                throw new InvalidOperationException("Please select a project type");
+            }
+            else
+            {
+                await projectService.InsertProjectAsync(obj);
+                NavigationManager.NavigateTo($"/Dash/{obj.Id}/{obj.ProjectType}");
+            }
+
+
+
+        }
+        void Cancel()
+        {
+            NavigationManager.NavigateTo("");
+        }
+
+
+    }

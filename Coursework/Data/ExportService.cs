@@ -11,7 +11,7 @@ namespace Coursework.Data
     {   
 
         //Export project data to PDF document.
-        public MemoryStream CreatePdf(Coursework.Data.Project.Project[] ProObj)
+        public MemoryStream CreatePdf(Coursework.Data.Ticket.Ticket[] ProObj)
         {
             if (ProObj == null)
             {
@@ -31,12 +31,12 @@ namespace Coursework.Data
                 PdfStandardFont font = new PdfStandardFont(PdfFontFamily.TimesRoman, 16);
 
                 //Create a text element to draw a text in PDF page
-                PdfTextElement title = new PdfTextElement("Projects Report", font, PdfBrushes.Black);
+                PdfTextElement title = new PdfTextElement("Ticket Summary", font, PdfBrushes.Black);
                 PdfLayoutResult result = title.Draw(page, new PointF(0, 0));
 
 
                 PdfStandardFont contentFont = new PdfStandardFont(PdfFontFamily.TimesRoman, 12);
-                PdfTextElement content = new PdfTextElement("This report includes project details in companies.", contentFont, PdfBrushes.Black);
+                PdfTextElement content = new PdfTextElement("This report includes project details of the company.", contentFont, PdfBrushes.Black);
                 PdfLayoutFormat format = new PdfLayoutFormat();
                 format.Layout = PdfLayoutType.Paginate;
 
