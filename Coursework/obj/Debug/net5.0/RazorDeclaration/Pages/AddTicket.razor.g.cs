@@ -98,14 +98,12 @@ using Coursework.Data;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 67 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\AddTicket.razor"
+#line 130 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\AddTicket.razor"
        
     [Parameter]
     public String Id { get; set; }
     [Parameter]
     public String ProjectType { get; set; }
-
-
 
     DateTime now = DateTime.Now;
 
@@ -118,7 +116,7 @@ using Coursework.Data;
 
     }
 
-    protected async void CreateEmployee()
+    protected async void CreateTicket()
     {
         await ticketService.InsertTicketAsync(obj);
         NavigationManager.NavigateTo($"/Dash/{Id}/{ProjectType}");

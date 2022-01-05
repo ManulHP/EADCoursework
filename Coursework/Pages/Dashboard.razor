@@ -31,6 +31,7 @@ else
     <table class="table table-borderless table-striped table-fixed">
         <thead class="thead-dark">
             <tr>
+                <th style="width:200px">Title</th>
                 <th style="width:550px">Description</th>
                 @{
                     if (ProType == "Workplace")
@@ -48,22 +49,22 @@ else
             {
                 if (emp.Status == "New")
                 {
-                    <tr>
-
-                        <td>@emp.Description</td>
-                        @{
-                            if (ProType == "Workplace")
-                            {
-                                <td>@emp.Assignee</td>
-                            }
-                        }
-                        <td>@emp.Status</td>
-                        <td>@emp.DueDate</td>
-                        <td class="text-right">
-                            <a class="btn btn-primary btn-sm" href="EditTicket/@emp.Id/@ProType" role="button">Edit</a>
-                            <a class="btn btn-danger btn-sm" href="DeleteTicket/@emp.Id/@ProType" role="button">Delete</a>
-                        </td>
-                    </tr>
+            <tr>
+                <td>@emp.Title</td>
+                <td>@emp.Description</td>
+                @{
+                    if (ProType == "Workplace")
+                    {
+                        <td>@emp.Assignee</td>
+                    }
+                }
+                <td>@emp.Status</td>
+                <td>@emp.DueDate</td>
+                <td class="text-right">
+                    <a class="btn btn-primary btn-sm" href="EditTicket/@emp.Id/@ProType" role="button">Edit</a>
+                    <a class="btn btn-danger btn-sm" href="DeleteTicket/@emp.Id/@ProType" role="button">Delete</a>
+                </td>
+            </tr>
                 }
             }
         </tbody>
@@ -72,6 +73,7 @@ else
     <table class="table table-borderless table-striped table-fixed">
         <thead class="thead-dark">
             <tr>
+                <th style="width:200px">Title</th>
                 <th style="width:550px">Description</th>
                 @{
                     if (ProType == "Workplace")
@@ -89,22 +91,22 @@ else
             {
                 if (emp.Status == "In-progress")
                 {
-                    <tr>
-
-                        <td>@emp.Description</td>
-                        @{
-                            if (ProType == "Workplace")
-                            {
-                                <td style="width:250px">@emp.Assignee</td>
-                            }
-                        }
-                        <td>@emp.Status</td>
-                        <td>@emp.DueDate</td>
-                        <td class="text-right">
-                            <a class="btn btn-primary btn-sm" href="EditTicket/@emp.Id/@ProType" role="button">Edit</a>
-                            <a class="btn btn-danger btn-sm" href="DeleteTicket/@emp.Id/@ProType" role="button">Delete</a>
-                        </td>
-                    </tr>
+            <tr>
+                <td>@emp.Title</td>
+                <td>@emp.Description</td>
+                @{
+                    if (ProType == "Workplace")
+                    {
+                        <td style="width:250px">@emp.Assignee</td>
+                    }
+                }
+                <td>@emp.Status</td>
+                <td>@emp.DueDate</td>
+                <td class="text-right">
+                    <a class="btn btn-primary btn-sm" href="EditTicket/@emp.Id/@ProType" role="button">Edit</a>
+                    <a class="btn btn-danger btn-sm" href="DeleteTicket/@emp.Id/@ProType" role="button">Delete</a>
+                </td>
+            </tr>
                 }
             }
         </tbody>
@@ -113,6 +115,7 @@ else
     <table class="table table-borderless table-striped table-fixed">
         <thead class="thead-dark">
             <tr>
+                <th style="width:200px">Title</th>
                 <th style="width:550px">Description</th>
                 @{
                     if (ProType == "Workplace")
@@ -131,7 +134,7 @@ else
                 if (emp.Status == "Closed")
                 {
                     <tr>
-
+                        <td>@emp.Title</td>
                         <td>@emp.Description</td>
                         @{
                             if (ProType == "Workplace")
@@ -181,7 +184,7 @@ else
             {
                 using (MemoryStream excelStream = exportService.CreatePdf(TicketsArray))
                 {
-                    await JS.SaveAs("Sample.pdf", excelStream.ToArray());
+                    await JS.SaveAs("Ticket_Summary.pdf", excelStream.ToArray());
                 }
             }
 

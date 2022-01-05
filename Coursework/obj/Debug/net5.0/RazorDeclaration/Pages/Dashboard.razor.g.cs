@@ -105,7 +105,7 @@ using System.IO;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 159 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\Dashboard.razor"
+#line 162 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\Dashboard.razor"
                
             [Parameter]
             public String Id { get; set; }
@@ -131,7 +131,7 @@ using System.IO;
             {
                 using (MemoryStream excelStream = exportService.CreatePdf(TicketsArray))
                 {
-                    await JS.SaveAs("Sample.pdf", excelStream.ToArray());
+                    await JS.SaveAs("Ticket_Summary.pdf", excelStream.ToArray());
                 }
             }
 

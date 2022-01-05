@@ -98,7 +98,7 @@ using Coursework.Data;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 60 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\AddProject.razor"
+#line 65 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\AddProject.razor"
            
 
 
@@ -113,7 +113,6 @@ using Coursework.Data;
         {
             NavigationManager.NavigateTo("");
         }
-
 
     
 

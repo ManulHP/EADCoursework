@@ -10,21 +10,18 @@ namespace Coursework.Data.Ticket
     {
         [Key]
         public Int32 Id { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Ticket title is required*")]
         [StringLength(155)]
         public String Title { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Ticket description is required*")]
         [StringLength(250)]
         public String Description { get; set; }
         public String Assignee { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Ticket status is required*")]
         public String Status { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Due date is required*")]
         public DateTime DueDate { get; set; }
 
         public String ProjectId { get; set; }
-
-      
-
     }
 }
