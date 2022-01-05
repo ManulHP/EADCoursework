@@ -49,7 +49,7 @@ namespace Coursework.Data
                 pdfGrid.Style.CellPadding.Right = cellMargin;
 
                 //Applying built-in style to the PDF grid
-                pdfGrid.ApplyBuiltinStyle(PdfGridBuiltinStyle.GridTable4Accent1);
+                pdfGrid.ApplyBuiltinStyle(PdfGridBuiltinStyle.GridTable2Accent4);
 
                 //Assign data source
                 pdfGrid.DataSource = ProObj;

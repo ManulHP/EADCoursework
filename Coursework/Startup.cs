@@ -40,7 +40,6 @@ namespace Coursework
             services.AddServerSideBlazor();
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
             services.AddDatabaseDeveloperPageExceptionFilter();
-            services.AddSingleton<WeatherForecastService>();
 
             services.AddScoped<Coursework.Data.Project.ProjectService>();
             services.AddScoped<Coursework.Data.Ticket.TicketService>();
