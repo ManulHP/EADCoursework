@@ -42,7 +42,7 @@ namespace Coursework.Data.Project
         #endregion
 
         #region Update Project
-        public async Task<bool> UpdateTicketeAsync(Coursework.Data.Project.Project project)
+        public async Task<bool> UpdateProjectAsync(Coursework.Data.Project.Project project)
         {
             _appDBContext.Projects.Update(project);
             await _appDBContext.SaveChangesAsync();

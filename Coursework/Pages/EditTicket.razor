@@ -6,7 +6,7 @@
 <h2>Edit Ticket</h2>
 <hr />
 
-<form>
+@*<form>
     <div class="row">
         <div class="col-md-8">
             <div class="form-group">
@@ -55,7 +55,70 @@
             </div>
         </div>
     </div>
-</form>
+</form>*@
+
+<EditForm Model="@obj">
+    <DataAnnotationsValidator />
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="City" class="control-label">Title</label>
+                <input form="City" class="form-control" @bind="@obj.Title" />
+                <ValidationMessage For="@(() => obj.Title)" />
+            </div>
+
+            <div class="form-group">
+                <label for="Name" class="control-label">Description</label>
+                <input form="Name" class="form-control" @bind="@obj.Description" />
+                <ValidationMessage For="@(() => obj.Description)" />
+            </div>
+
+
+
+            @{
+                if (ProjectType == "Workplace")
+                {
+                    <div class="form-group">
+                        <label for="City" class="control-label">Assign to</label>
+                        <input form="City" class="form-control" @bind="@obj.Assignee" />
+                    </div>
+                }
+            }
+
+            <div class="form-group">
+                <label for="City" class="control-label">Status</label>
+                <select @bind="@obj.Status" class="form-control">
+                    <option value="0" selected></option>
+                    <option value="New">New</option>
+                    <option value="In-progress">In-progress</option>
+                    <option value="Closed">Close</option>
+                </select>
+                <ValidationMessage For="@(() => obj.Status)" />
+            </div>
+
+            <div class="form-group">
+                <label for="City" class="control-label">Due Date</label>
+                <input type="date" class="form-control" @bind="@obj.DueDate" />
+                <ValidationMessage For="@(() => obj.DueDate)" />
+            </div>
+
+            <div class="form-group">
+                <input form="City" type="hidden" class="form-control" @bind="@obj.ProjectId" />
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" @onclick="@UpdateTicket">Submit</button>
+                <input type="button" class="btn btn-primary" @onclick="@Cancel" value="Cancel" />
+            </div>
+        </div>
+    </div>
+</EditForm>
 
 @code {
     [Parameter]
@@ -68,10 +131,25 @@
     {
         obj = await Task.Run(() => ticketService.GetTicketAsync(Convert.ToInt32(Id)));
     }
-    protected async void UpdateEmployee()
+    protected async void UpdateTicket()
     {
-        await ticketService.UpdateTicket(obj);
-        NavigationManager.NavigateTo($"/Dash/{obj.ProjectId}/{ProjectType}");
+        if (obj.Title == "")
+        {
+            Console.WriteLine("Error");
+        }
+        else if (obj.Description == "")
+        {
+            Console.WriteLine("Error");
+        }
+        else if (obj.Status == "0")
+        {
+            Console.WriteLine("Error");
+        }
+        else {
+            await ticketService.UpdateTicket(obj);
+            NavigationManager.NavigateTo($"/Dash/{obj.ProjectId}/{ProjectType}");
+        }
+
     }
     void Cancel()
     {

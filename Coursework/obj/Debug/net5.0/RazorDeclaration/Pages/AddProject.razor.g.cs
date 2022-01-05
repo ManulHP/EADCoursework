@@ -105,8 +105,16 @@ using Coursework.Data;
         Coursework.Data.Project.Project obj = new Coursework.Data.Project.Project();
         protected async void CreateProject()
         {
-            await projectService.InsertProjectAsync(obj);
-            NavigationManager.NavigateTo($"/Dash/{obj.Id}/{obj.ProjectType}");
+            if (obj.Title == "")
+            {
+                Console.WriteLine("Error");
+            }
+            else 
+            {
+                await projectService.InsertProjectAsync(obj);
+                NavigationManager.NavigateTo($"/Dash/{obj.Id}/{obj.ProjectType}");
+            }
+
 
         }
         void Cancel()

@@ -98,7 +98,7 @@ using Coursework.Data;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 60 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\EditTicket.razor"
+#line 123 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\EditTicket.razor"
        
     [Parameter]
     public String Id { get; set; }
@@ -110,10 +110,25 @@ using Coursework.Data;
     {
         obj = await Task.Run(() => ticketService.GetTicketAsync(Convert.ToInt32(Id)));
     }
-    protected async void UpdateEmployee()
+    protected async void UpdateTicket()
     {
-        await ticketService.UpdateTicket(obj);
-        NavigationManager.NavigateTo($"/Dash/{obj.ProjectId}/{ProjectType}");
+        if (obj.Title == "")
+        {
+            Console.WriteLine("Error");
+        }
+        else if (obj.Description == "")
+        {
+            Console.WriteLine("Error");
+        }
+        else if (obj.Status == "0")
+        {
+            Console.WriteLine("Error");
+        }
+        else {
+            await ticketService.UpdateTicket(obj);
+            NavigationManager.NavigateTo($"/Dash/{obj.ProjectId}/{ProjectType}");
+        }
+
     }
     void Cancel()
     {
