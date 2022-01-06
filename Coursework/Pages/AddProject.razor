@@ -3,82 +3,86 @@
 @inject Coursework.Data.Project.ProjectService projectService
 @inject NavigationManager NavigationManager
 
+<AuthorizeView>
+    @*if the user is login in then show the add projects section if not show the login and register buttons*@
+    <Authorized>
+        <h2>Add Project</h2>
+        <hr />
 
-    <AuthorizeView>
-        <Authorized>
-            <h2>Add Project</h2>
-            <hr />
-
-            <EditForm Context="formContext" Model="@obj">
-                <DataAnnotationsValidator />
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="form-group">
-                            <label for="CompanyName" class="control-label">Title</label>
-                            <input form="CompanyName" class="form-control" @bind="@obj.Title" />
-                            <ValidationMessage For="@(() => obj.Title)" />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="Title" class="control-label">Company Name</label>
-                            <input form="Title" class="form-control" @bind="@obj.CompanyName" />
-                            <ValidationMessage For="@(() => obj.CompanyName)" />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="CompanyName" class="control-label">Description</label>
-                            <input form="CompanyName" class="form-control" @bind="@obj.Description" />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="City" class="control-label">Status</label>
-                            <select @bind="@obj.ProjectType" class="form-control">
-                                <option value="0" selected></option>
-                                <option value="Workplace">Workplace</option>
-                                <option value="Individual">Individual</option>
-                            </select>
-                            <ValidationMessage For="@(() => obj.ProjectType)" />
-                        </div>
-
+        <EditForm Context="formContext" Model="@obj">
+            <DataAnnotationsValidator />
+            <div class="row">
+                <div class="col-md-8">
+                    @*To display the project title*@
+                    <div class="form-group">
+                        <label for="CompanyName" class="control-label">Title</label>
+                        <input form="CompanyName" class="form-control" @bind="@obj.Title" />
+                        <ValidationMessage For="@(() => obj.Title)" />
+                    </div>
+                    @*To display the project name*@
+                    <div class="form-group">
+                        <label for="Title" class="control-label">Company Name</label>
+                        <input form="Title" class="form-control" @bind="@obj.CompanyName" />
+                        <ValidationMessage For="@(() => obj.CompanyName)" />
+                    </div>
+                    @*To display the project description*@
+                    <div class="form-group">
+                        <label for="CompanyName" class="control-label">Description</label>
+                        <input form="CompanyName" class="form-control" @bind="@obj.Description" />
+                    </div>
+                    @*To display the project type*@
+                    <div class="form-group">
+                        <label for="Status" class="control-label">Status</label>
+                        <select @bind="@obj.ProjectType" class="form-control">
+                            <option value="0" selected></option>
+                            <option value="Workplace">Workstation</option>
+                            <option value="Individual">Individual</option>
+                        </select>
+                        <ValidationMessage For="@(() => obj.ProjectType)" />
                     </div>
                 </div>
+            </div>
 
 
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary" @onclick="@CreateProject">Submit</button>
-                            <input type="button" class="btn btn-primary" @onclick="@Cancel" value="Cancel" />
-                        </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary" @onclick="@CreateProject">Submit</button>
+                        <input type="button" class="btn btn-primary" @onclick="@Cancel" value="Cancel" />
                     </div>
                 </div>
-            </EditForm>
+            </div>
+        </EditForm>
 
-        </Authorized>
-        <NotAuthorized>
-            <a class="btn btn-primary" href="Identity/Account/Register">Register</a>
-            <a class="btn btn-primary" href="Identity/Account/Login">Log in</a>
-        </NotAuthorized>
-    </AuthorizeView>
+    </Authorized>
+    <NotAuthorized>
+        <a class="btn btn-primary" href="Identity/Account/Register">Register</a>
+        <a class="btn btn-primary" href="Identity/Account/Login">Log in</a>
+    </NotAuthorized>
+</AuthorizeView>
 
 
     @code {
-
-
+        // creating a project object
         Coursework.Data.Project.Project obj = new Coursework.Data.Project.Project();
         protected async void CreateProject()
         {
             if (obj.Title == "")
             {
                 Console.WriteLine("Error");
-            }
-            else 
+            }else if(obj.CompanyName == "")
             {
+                Console.WriteLine("Error");
+            }else if (obj.ProjectType == "0") 
+            {
+                Console.WriteLine("Error");
+            }
+            else
+            {
+                // passing to object to the insert project method in project service to add it to the database
                 await projectService.InsertProjectAsync(obj);
                 NavigationManager.NavigateTo($"/Dash/{obj.Id}/{obj.ProjectType}");
             }
-
-
         }
         void Cancel()
         {

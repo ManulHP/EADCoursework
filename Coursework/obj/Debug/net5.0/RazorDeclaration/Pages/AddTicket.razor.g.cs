@@ -98,19 +98,42 @@ using Coursework.Data;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 130 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\AddTicket.razor"
+#line 74 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\AddTicket.razor"
        
     [Parameter]
     public String Id { get; set; }
     [Parameter]
     public String ProjectType { get; set; }
 
+    
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 80 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\AddTicket.razor"
+                               
     DateTime now = DateTime.Now;
 
+    
 
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 83 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\AddTicket.razor"
+                               
     Coursework.Data.Ticket.Ticket obj = new Coursework.Data.Ticket.Ticket();
     protected override void OnInitialized()
     {
+        
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 87 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\AddTicket.razor"
+                                                
         obj.ProjectId = Id;
         obj.DueDate = now;
 
@@ -118,9 +141,18 @@ using Coursework.Data;
 
     protected async void CreateTicket()
     {
-        await ticketService.InsertTicketAsync(obj);
-        NavigationManager.NavigateTo($"/Dash/{Id}/{ProjectType}");
+        if (obj.Title == "")
+        {
+            Console.WriteLine("Error");
+        }
+        else
+        {
+            await ticketService.InsertTicketAsync(obj);
+            NavigationManager.NavigateTo($"/Dash/{Id}/{ProjectType}");
+        }
+
     }
+
     void Cancel()
     {
         NavigationManager.NavigateTo($"/Dash/{Id}/{ProjectType}");

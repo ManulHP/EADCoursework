@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Coursework.Migrations
 {
-    public partial class DBTestFive : Migration
+    public partial class BDTestRunOne : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

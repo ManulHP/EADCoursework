@@ -1,6 +1,6 @@
 ﻿<AuthorizeView>
     <Authorized>
-        <a class="py-2 d-none d-md-inline-block" href="Identity/Account/Manage">@context.User.Identity.Name!</a>
+        <a class="py-2 d-none d-md-inline-block" href="Identity/Account/Manage">@context.User.Identity.Name</a>
         <form class="py-2 d-none d-md-inline-block" method="post" action="Identity/Account/LogOut">
             <button type="submit" class="nav-link btn btn-link">Log out</button>
         </form>

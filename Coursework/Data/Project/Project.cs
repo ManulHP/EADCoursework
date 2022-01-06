@@ -13,14 +13,15 @@ namespace Coursework.Data.Project
         public Int32 Id { get; set; }
 
         [Required(ErrorMessage = "Company name is required*")]
-        [StringLength(55, ErrorMessage = "That name is too long")]
+        [StringLength(55, ErrorMessage = "Exceeds the word link")]
+        [MinLength(5,ErrorMessage ="The minimum length of the text should 5")]
         public String CompanyName { get; set; }
 
         [Required(ErrorMessage ="Title is required*")]
-        [StringLength(255, ErrorMessage ="Exceeded the work count")]
+        [StringLength(255, ErrorMessage ="Exceeded the word limit")]
         public String Title { get; set; }
 
-        [StringLength(255)]
+        [StringLength(255, ErrorMessage ="Exceeds the word limit")]
         public String Description { get; set; }
 
         [Required(ErrorMessage ="Project type is required*")]

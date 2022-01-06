@@ -12,13 +12,15 @@ namespace Coursework.Data.Ticket
         public Int32 Id { get; set; }
 
         [Required(ErrorMessage ="Ticket title is required*")]
-        [StringLength(155)]
+        [StringLength(155, ErrorMessage ="Exceeds the work limit",MinimumLength =5)]
+        [MinLength(5,ErrorMessage ="Minimum length must be greater than 5")]
         public String Title { get; set; }
 
         [Required(ErrorMessage ="Ticket description is required*")]
-        [StringLength(250)]
+        [StringLength(250, ErrorMessage ="Exceeds the word limit")]
         public String Description { get; set; }
 
+        [EmailAddress]
         public String Assignee { get; set; }
 
         [Required(ErrorMessage ="Ticket status is required*")]

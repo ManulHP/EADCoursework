@@ -6,7 +6,9 @@
 @using  System.IO;
 @inject ExportService exportService
 @inject Coursework.Data.Project.ProjectService projectService
+@*Displays the tickets accordingly to the rpoject id*@
 
+@*Displays the register and login buttons if the user is not logged in. If the user is logged in it shows the add new ticket and export data option*@
 <AuthorizeView>
     <Authorized>
         <button class="btn btn-primary" type="button" @onclick="ButtonClick">Add new ticket</button>
@@ -20,18 +22,18 @@
 
 <div style="padding-bottom:10px"></div>
 
-
+@*if the ticket object is null it shows a error*@
 @if (TicketObj is null)
 {
     <p><em>Loading... !</em></p>
 }
 else
 {
-
+    @*Displays on the tickets with the tag new*@
     <table class="table table-borderless table-striped table-fixed">
         <thead class="thead-dark">
             <tr>
-                <th style="width:200px">Title</th>
+                <th style="width:150px">Title</th>
                 <th style="width:550px">Description</th>
                 @{
                     if (ProType == "Workplace")
@@ -49,31 +51,31 @@ else
             {
                 if (emp.Status == "New")
                 {
-            <tr>
-                <td>@emp.Title</td>
-                <td>@emp.Description</td>
-                @{
-                    if (ProType == "Workplace")
-                    {
-                        <td>@emp.Assignee</td>
-                    }
-                }
-                <td>@emp.Status</td>
-                <td>@emp.DueDate</td>
-                <td class="text-right">
-                    <a class="btn btn-primary btn-sm" href="EditTicket/@emp.Id/@ProType" role="button">Edit</a>
-                    <a class="btn btn-danger btn-sm" href="DeleteTicket/@emp.Id/@ProType" role="button">Delete</a>
-                </td>
-            </tr>
+                    <tr>
+                        <td>@emp.Title</td>
+                        <td>@emp.Description</td>
+                        @{
+                            if (ProType == "Workplace")
+                            {
+                                <td>@emp.Assignee</td>
+                            }
+                        }
+                        <td>@emp.Status</td>
+                        <td>@emp.DueDate</td>
+                        <td class="text-right">
+                            <a class="btn btn-primary btn-sm" href="EditTicket/@emp.Id/@ProType" role="button">Edit</a>
+                            <a class="btn btn-danger btn-sm" href="DeleteTicket/@emp.Id/@ProType" role="button">Delete</a>
+                        </td>
+                    </tr>
                 }
             }
         </tbody>
     </table>
-
+    @*Displays on the tickets with the tag in-progress*@
     <table class="table table-borderless table-striped table-fixed">
         <thead class="thead-dark">
             <tr>
-                <th style="width:200px">Title</th>
+                <th style="width:150px">Title</th>
                 <th style="width:550px">Description</th>
                 @{
                     if (ProType == "Workplace")
@@ -91,31 +93,31 @@ else
             {
                 if (emp.Status == "In-progress")
                 {
-            <tr>
-                <td>@emp.Title</td>
-                <td>@emp.Description</td>
-                @{
-                    if (ProType == "Workplace")
-                    {
-                        <td style="width:250px">@emp.Assignee</td>
-                    }
-                }
-                <td>@emp.Status</td>
-                <td>@emp.DueDate</td>
-                <td class="text-right">
-                    <a class="btn btn-primary btn-sm" href="EditTicket/@emp.Id/@ProType" role="button">Edit</a>
-                    <a class="btn btn-danger btn-sm" href="DeleteTicket/@emp.Id/@ProType" role="button">Delete</a>
-                </td>
-            </tr>
+                    <tr>
+                        <td>@emp.Title</td>
+                        <td>@emp.Description</td>
+                        @{
+                            if (ProType == "Workplace")
+                            {
+                                <td style="width:250px">@emp.Assignee</td>
+                            }
+                        }
+                        <td>@emp.Status</td>
+                        <td>@emp.DueDate</td>
+                        <td class="text-right">
+                            <a class="btn btn-primary btn-sm" href="EditTicket/@emp.Id/@ProType" role="button">Edit</a>
+                            <a class="btn btn-danger btn-sm" href="DeleteTicket/@emp.Id/@ProType" role="button">Delete</a>
+                        </td>
+                    </tr>
                 }
             }
         </tbody>
     </table>
-
+    @*Displays on the tickets with the tag closed*@
     <table class="table table-borderless table-striped table-fixed">
         <thead class="thead-dark">
             <tr>
-                <th style="width:200px">Title</th>
+                <th style="width:150px">Title</th>
                 <th style="width:550px">Description</th>
                 @{
                     if (ProType == "Workplace")
@@ -155,37 +157,39 @@ else
     </table>
 
 
+}
+
+
+
+@code {
+    [Parameter]
+    public String Id { get; set; }
+    [Parameter]
+    public String ProType { get; set; }
+
+    // created a ticket object list and array
+    List<Coursework.Data.Ticket.Ticket> TicketObj;
+    private Coursework.Data.Ticket.Ticket[] TicketsArray;
+
+    protected override async Task OnInitializedAsync()
+    {
+        //once the page is loaded it fetch that data from the database
+        TicketObj = await Task.Run(() => ticketService.GetTicketByProjectIdAsync(Id)); ;
+        TicketsArray = await Task.Run(() => ticketService.GetTicketByProjectIdReportAsync(Id));
+    }
+
+
+    protected async void ButtonClick()
+    {
+        NavigationManager.NavigateTo($"/AddTicket/{Id}/{ProType}");
+    }
+    // Exporting the ticket summary pdf 
+    protected async Task ExportToPdf()
+    {
+        using (MemoryStream excelStream = exportService.GeneratePdf(TicketsArray))
+        {
+            await JS.SaveAs("Ticket_Summary.pdf", excelStream.ToArray());
         }
+    }
 
-
-
-        @code {
-            [Parameter]
-            public String Id { get; set; }
-            [Parameter]
-            public String ProType { get; set; }
-
-            List<Coursework.Data.Ticket.Ticket> TicketObj;
-            private Coursework.Data.Ticket.Ticket[] TicketsArray;
-
-            protected override async Task OnInitializedAsync()
-            {
-                TicketObj = await Task.Run(() => ticketService.GetTicketByProjectIdAsync(Id)); ;
-                TicketsArray = await Task.Run(() => ticketService.GetTicketByProjectIdReportAsync(Id));
-            }
-
-
-            protected async void ButtonClick()
-            {
-                NavigationManager.NavigateTo($"/AddTicket/{Id}/{ProType}");
-            }
-
-            protected async Task ExportToPdf()
-            {
-                using (MemoryStream excelStream = exportService.CreatePdf(TicketsArray))
-                {
-                    await JS.SaveAs("Ticket_Summary.pdf", excelStream.ToArray());
-                }
-            }
-
-        }
+}

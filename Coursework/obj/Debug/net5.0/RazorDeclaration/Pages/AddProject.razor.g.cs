@@ -100,22 +100,26 @@ using Coursework.Data;
 #nullable restore
 #line 65 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\AddProject.razor"
            
-
-
+        // creating a project object
         Coursework.Data.Project.Project obj = new Coursework.Data.Project.Project();
         protected async void CreateProject()
         {
             if (obj.Title == "")
             {
                 Console.WriteLine("Error");
-            }
-            else 
+            }else if(obj.CompanyName == "")
             {
+                Console.WriteLine("Error");
+            }else if (obj.ProjectType == "0") 
+            {
+                Console.WriteLine("Error");
+            }
+            else
+            {
+                // passing to object to the insert project method in project service to add it to the database
                 await projectService.InsertProjectAsync(obj);
                 NavigationManager.NavigateTo($"/Dash/{obj.Id}/{obj.ProjectType}");
             }
-
-
         }
         void Cancel()
         {

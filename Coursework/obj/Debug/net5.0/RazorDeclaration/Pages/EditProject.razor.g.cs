@@ -98,7 +98,7 @@ using Coursework.Data;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 93 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\EditProject.razor"
+#line 44 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\EditProject.razor"
        
     [Parameter]
     public String Id { get; set; }
@@ -109,6 +109,7 @@ using Coursework.Data;
     }
     protected async void UpdateProject()
     {
+        //validation
         if (obj.Title == "")
         {
             Console.WriteLine("Error");

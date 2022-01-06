@@ -6,107 +6,51 @@
 <h2>Add Ticket</h2>
 <hr />
 
-@*<form>
+<EditForm Model="@obj">
+    <DataAnnotationsValidator />
     <div class="row">
         <div class="col-md-8">
+            @*To display the ticket title*@
             <div class="form-group">
-                <label for="City" class="control-label">Title</label>
+                <label for="Title" class="control-label">Title</label>
                 <input form="City" class="form-control" @bind="@obj.Title" />
+                <ValidationMessage For="@(() => obj.Title)" />
             </div>
-
+            @*To display the ticket description*@
             <div class="form-group">
-                <label for="Name" class="control-label">Description</label>
+                <label for="Description" class="control-label">Description</label>
                 <input form="Name" class="form-control" @bind="@obj.Description" />
+                <ValidationMessage For="@(() => obj.Description)" />
             </div>
 
 
-            
+            @*Assignees only display if the project type is workplace *@
             @{
-                if (ProjectType == "Workplace") { 
-                        <div class="form-group">
-                            <label for="City" class="control-label">Assign to</label>
-                            <input form="City" class="form-control" @bind="@obj.Assignee" />
-                        </div>
+                if (ProjectType == "Workplace")
+                {
+                    <div class="form-group">
+                        <label for="Assignee" class="control-label">Assign to</label>
+                        <input form="City" class="form-control" @bind="@obj.Assignee" />
+                    </div>
                 }
             }
-
+            @*To display the tag related to the title*@
             <div class="form-group">
-                <label for="City" class="control-label">Status</label>
+                <label for="Status" class="control-label">Status</label>
                 <select @bind="@obj.Status" class="form-control">
                     <option value="0" selected></option>
                     <option value="New">New</option>
                     <option value="In-progress">In-progress</option>
                     <option value="Closed">Close</option>
                 </select>
+                <ValidationMessage For="@(() => obj.Status)" />
             </div>
-
+            @*To display the due date*@
             <div class="form-group">
-                <label for="City" class="control-label">Due Date</label>
+                <label for="DueDate" class="control-label">Due Date</label>
                 <input type="date" class="form-control" @bind="@obj.DueDate" />
+                <ValidationMessage For="@(() => obj.DueDate)" />
             </div>
-
-            <div class="form-group">
-                <input form="City" type="hidden" class="form-control" @bind="@obj.ProjectId" />
-            </div>
-
-        </div>
-    </div>
-
-
-    <div class="row">
-        <div class="col-md-4">
-            <div class="form-group">
-                <input type="button" class="btn btn-primary" @onclick="@CreateEmployee" value="Save" />
-                <input type="button" class="btn btn-primary" @onclick="@Cancel" value="Cancel" />
-            </div>
-        </div>
-    </div>
-</form>*@
-
-<EditForm Model="@obj">
-    <DataAnnotationsValidator />
-    <div class="row">
-        <div class="col-md-8">
-            <div class="form-group">
-                <label for="City" class="control-label">Title</label>
-                <input form="City" class="form-control" @bind="@obj.Title" />
-                <ValidationMessage For="@(() => obj.Title)" />
-            </div>
-
-            <div class="form-group">
-                <label for="Name" class="control-label">Description</label>
-                <input form="Name" class="form-control" @bind="@obj.Description" />
-                <ValidationMessage For="@(() => obj.Description)" />
-            </div>
-
-
-
-            @{
-                if (ProjectType == "Workplace")
-                {
-                    <div class="form-group">
-                        <label for="City" class="control-label">Assign to</label>
-                        <input form="City" class="form-control" @bind="@obj.Assignee" />
-                    </div>
-                }
-            }
-
-        <div class="form-group">
-            <label for="City" class="control-label">Status</label>
-            <select @bind="@obj.Status" class="form-control">
-                <option value="0" selected></option>
-                <option value="New">New</option>
-                <option value="In-progress">In-progress</option>
-                <option value="Closed">Close</option>
-            </select>
-            <ValidationMessage For="@(() => obj.Status)" />
-        </div>
-
-        <div class="form-group">
-            <label for="City" class="control-label">Due Date</label>
-            <input type="date" class="form-control" @bind="@obj.DueDate" />
-            <ValidationMessage For="@(() => obj.DueDate)" />
-        </div>
 
             <div class="form-group">
                 <input form="City" type="hidden" class="form-control" @bind="@obj.ProjectId" />
@@ -133,12 +77,14 @@
     [Parameter]
     public String ProjectType { get; set; }
 
+    @*To get the current date*@
     DateTime now = DateTime.Now;
 
-
+    @*Created a ticket object*@
     Coursework.Data.Ticket.Ticket obj = new Coursework.Data.Ticket.Ticket();
     protected override void OnInitialized()
     {
+        @*Assigned the variables to the object*@
         obj.ProjectId = Id;
         obj.DueDate = now;
 
@@ -146,9 +92,18 @@
 
     protected async void CreateTicket()
     {
-        await ticketService.InsertTicketAsync(obj);
-        NavigationManager.NavigateTo($"/Dash/{Id}/{ProjectType}");
+        if (obj.Title == "")
+        {
+            Console.WriteLine("Error");
+        }
+        else
+        {
+            await ticketService.InsertTicketAsync(obj);
+            NavigationManager.NavigateTo($"/Dash/{Id}/{ProjectType}");
+        }
+
     }
+
     void Cancel()
     {
         NavigationManager.NavigateTo($"/Dash/{Id}/{ProjectType}");

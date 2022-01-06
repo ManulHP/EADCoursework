@@ -6,76 +6,27 @@
 <h2>Edit Project</h2>
 <hr />
 
-@*<form>
-    <div class="row">
-        <div class="col-md-8">
-            <div class="form-group">
-                <label for="Name" class="control-label">Title</label>
-                <input form="Name" class="form-control" @bind="@obj.Title" />
-            </div>
-
-            <div class="form-group">
-                <label for="Name" class="control-label">Company Name</label>
-                <input form="Name" class="form-control" @bind="@obj.CompanyName" />
-            </div>
-
-            <div class="form-group">
-                <label for="Designation" class="control-label">Description</label>
-                <input form="Designation" class="form-control" @bind="@obj.Description" />
-            </div>
-
-            <div class="form-group">
-                <label for="City" class="control-label">Status</label>
-                <select @bind="@obj.ProjectType" class="form-control">
-                    <option value="Workplace" selected>Workplace</option>
-                    <option value="Individual">Individual</option>
-                </select>
-            </div>
-
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-4">
-            <div class="form-group">
-                <input type="button" class="btn btn-primary" @onclick="@UpdateTicket" value="Update" />
-                <input type="button" class="btn btn-primary" @onclick="@Cancel" value="Cancel" />
-            </div>
-        </div>
-    </div>
-</form>*@
-
 <EditForm Model="@obj">
     <DataAnnotationsValidator />
     <div class="row">
         <div class="col-md-8">
+            @*To display the project title*@
             <div class="form-group">
                 <label for="CompanyName" class="control-label">Title</label>
                 <input form="CompanyName" class="form-control" @bind="@obj.Title" />
                 <ValidationMessage For="@(() => obj.Title)" />
             </div>
-
+            @*To display the company name*@
             <div class="form-group">
                 <label for="Title" class="control-label">Company Name</label>
                 <input form="Title" class="form-control" @bind="@obj.CompanyName" />
                 <ValidationMessage For="@(() => obj.CompanyName)" />
             </div>
-
+            @*To display the project description*@
             <div class="form-group">
                 <label for="Description" class="control-label">Description</label>
                 <input form="CompanyName" class="form-control" @bind="@obj.Description" />
             </div>
-
-            <div class="form-group">
-                <label for="Status" class="control-label">Status</label>
-                <select @bind="@obj.ProjectType" class="form-control">
-                    <option value="0" selected></option>
-                    <option value="Workplace">Workplace</option>
-                    <option value="Individual">Individual</option>
-                </select>
-                <ValidationMessage For="@(() => obj.ProjectType)" />
-            </div>
-
         </div>
     </div>
 
@@ -100,6 +51,7 @@
     }
     protected async void UpdateProject()
     {
+        //validation
         if (obj.Title == "")
         {
             Console.WriteLine("Error");

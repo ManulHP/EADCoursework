@@ -6,67 +6,17 @@
 <h2>Edit Ticket</h2>
 <hr />
 
-@*<form>
-    <div class="row">
-        <div class="col-md-8">
-            <div class="form-group">
-                <label for="Name" class="control-label">Title</label>
-                <input form="Name" class="form-control" @bind="@obj.Title" />
-            </div>
-
-            <div class="form-group">
-                <label for="Name" class="control-label">Description</label>
-                <input form="Name" class="form-control" @bind="@obj.Description" />
-            </div>
-
-            @if (ProjectType == "Workplace") { 
-        <div class="form-group">
-            <label for="City" class="control-label">Assignee</label>
-            <input form="City" class="form-control" @bind="@obj.Assignee" />
-        </div>
-            }
-
-            <div class="form-group">
-                <label for="City" class="control-label">Status</label>
-                <select @bind="@obj.Status" class="form-control">
-                    <option value="0" selected></option>
-                    <option value="New">New</option>
-                    <option value="In-progress">In-progress</option>
-                    <option value="Closed">Close</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="City" class="control-label">Due Date</label>
-                <input type="date" class="form-control" @bind="@obj.DueDate" />
-            </div>
-
-            <div class="form-group">
-                <input form="City" type="hidden" class="form-control" @bind="@obj.ProjectId" />
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-4">
-            <div class="form-group">
-                <input type="button" class="btn btn-primary" @onclick="@UpdateEmployee" value="Update" />
-                <input type="button" class="btn btn-primary" @onclick="@Cancel" value="Cancel" />
-            </div>
-        </div>
-    </div>
-</form>*@
-
 <EditForm Model="@obj">
     <DataAnnotationsValidator />
     <div class="row">
         <div class="col-md-8">
+            @*To display the ticket title*@
             <div class="form-group">
-                <label for="City" class="control-label">Title</label>
+                <label for="Title" class="control-label">Title</label>
                 <input form="City" class="form-control" @bind="@obj.Title" />
                 <ValidationMessage For="@(() => obj.Title)" />
             </div>
-
+            @*To display the ticket description*@
             <div class="form-group">
                 <label for="Name" class="control-label">Description</label>
                 <input form="Name" class="form-control" @bind="@obj.Description" />
@@ -74,7 +24,7 @@
             </div>
 
 
-
+            @*only gets displayed if the the project type is workplace*@
             @{
                 if (ProjectType == "Workplace")
                 {
@@ -84,9 +34,9 @@
                     </div>
                 }
             }
-
+            @*To display the ticket tags*@
             <div class="form-group">
-                <label for="City" class="control-label">Status</label>
+                <label for="Status" class="control-label">Status</label>
                 <select @bind="@obj.Status" class="form-control">
                     <option value="0" selected></option>
                     <option value="New">New</option>
@@ -95,15 +45,15 @@
                 </select>
                 <ValidationMessage For="@(() => obj.Status)" />
             </div>
-
+            @*To display the ticket due date*@
             <div class="form-group">
-                <label for="City" class="control-label">Due Date</label>
+                <label for="DueDate" class="control-label">Due Date</label>
                 <input type="date" class="form-control" @bind="@obj.DueDate" />
                 <ValidationMessage For="@(() => obj.DueDate)" />
             </div>
 
             <div class="form-group">
-                <input form="City" type="hidden" class="form-control" @bind="@obj.ProjectId" />
+                <input form="Projectid" type="hidden" class="form-control" @bind="@obj.ProjectId" />
             </div>
 
         </div>

@@ -105,37 +105,38 @@ using System.IO;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 162 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\Dashboard.razor"
-               
-            [Parameter]
-            public String Id { get; set; }
-            [Parameter]
-            public String ProType { get; set; }
+#line 164 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\Dashboard.razor"
+       
+    [Parameter]
+    public String Id { get; set; }
+    [Parameter]
+    public String ProType { get; set; }
 
-            List<Coursework.Data.Ticket.Ticket> TicketObj;
-            private Coursework.Data.Ticket.Ticket[] TicketsArray;
+    // created a ticket object list and array
+    List<Coursework.Data.Ticket.Ticket> TicketObj;
+    private Coursework.Data.Ticket.Ticket[] TicketsArray;
 
-            protected override async Task OnInitializedAsync()
-            {
-                TicketObj = await Task.Run(() => ticketService.GetTicketByProjectIdAsync(Id)); ;
-                TicketsArray = await Task.Run(() => ticketService.GetTicketByProjectIdReportAsync(Id));
-            }
+    protected override async Task OnInitializedAsync()
+    {
+        //once the page is loaded it fetch that data from the database
+        TicketObj = await Task.Run(() => ticketService.GetTicketByProjectIdAsync(Id)); ;
+        TicketsArray = await Task.Run(() => ticketService.GetTicketByProjectIdReportAsync(Id));
+    }
 
 
-            protected async void ButtonClick()
-            {
-                NavigationManager.NavigateTo($"/AddTicket/{Id}/{ProType}");
-            }
+    protected async void ButtonClick()
+    {
+        NavigationManager.NavigateTo($"/AddTicket/{Id}/{ProType}");
+    }
+    // Exporting the ticket summary pdf 
+    protected async Task ExportToPdf()
+    {
+        using (MemoryStream excelStream = exportService.GeneratePdf(TicketsArray))
+        {
+            await JS.SaveAs("Ticket_Summary.pdf", excelStream.ToArray());
+        }
+    }
 
-            protected async Task ExportToPdf()
-            {
-                using (MemoryStream excelStream = exportService.CreatePdf(TicketsArray))
-                {
-                    await JS.SaveAs("Ticket_Summary.pdf", excelStream.ToArray());
-                }
-            }
-
-        
 
 #line default
 #line hidden

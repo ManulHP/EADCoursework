@@ -105,7 +105,7 @@ using System.IO;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 110 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\ViewProject.razor"
+#line 92 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\ViewProject.razor"
        
     List<Coursework.Data.Project.Project> EmpObj;
     protected override async Task OnInitializedAsync()
@@ -113,20 +113,6 @@ using System.IO;
         EmpObj = await Task.Run(() => projectService.GetAllProjectAsync());
 
     }
-
-
-    [Inject] IJSRuntime JSRuntime { get; set; }
-    protected async Task MessageBox()
-    {
-        await JSRuntime.InvokeVoidAsync("exampleJsFunctions.ShowMsg",
-                                                     "Hello Blazor");
-    }
-
-    private void PrintReport()
-    {
-        JS.InvokeVoidAsync("print");
-    }
-
 
 #line default
 #line hidden

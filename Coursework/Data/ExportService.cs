@@ -11,7 +11,7 @@ namespace Coursework.Data
     {   
 
         //Export project data to PDF document.
-        public MemoryStream CreatePdf(Coursework.Data.Ticket.Ticket[] ProObj)
+        public MemoryStream GeneratePdf(Coursework.Data.Ticket.Ticket[] ProObj)
         {
             if (ProObj == null)
             {
@@ -22,16 +22,16 @@ namespace Coursework.Data
             {
 
                 int paragraphAfterSpacing = 8;
-                int cellMargin = 8;
+                int reportCellMargin = 8;
 
                 //Add page to the PDF document
                 PdfPage page = pdfDocument.Pages.Add();
 
                 //Create a new font
-                PdfStandardFont font = new PdfStandardFont(PdfFontFamily.TimesRoman, 16);
+                PdfStandardFont fontStyle = new PdfStandardFont(PdfFontFamily.TimesRoman, 16);
 
                 //Create a text element to draw a text in PDF page
-                PdfTextElement title = new PdfTextElement("Ticket Summary", font, PdfBrushes.Black);
+                PdfTextElement title = new PdfTextElement("Ticket Summary", fontStyle, PdfBrushes.Black);
                 PdfLayoutResult result = title.Draw(page, new PointF(0, 0));
 
 
@@ -45,8 +45,8 @@ namespace Coursework.Data
 
                 //Create a PdfGrid
                 PdfGrid pdfGrid = new PdfGrid();
-                pdfGrid.Style.CellPadding.Left = cellMargin;
-                pdfGrid.Style.CellPadding.Right = cellMargin;
+                pdfGrid.Style.CellPadding.Left = reportCellMargin;
+                pdfGrid.Style.CellPadding.Right = reportCellMargin;
 
                 //Applying built-in style to the PDF grid
                 pdfGrid.ApplyBuiltinStyle(PdfGridBuiltinStyle.GridTable2Accent4);
@@ -70,7 +70,6 @@ namespace Coursework.Data
                 }
             }
         }
-
 
     }
 }
