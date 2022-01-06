@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Coursework.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220106034556_BDTestRunOne")]
-    partial class BDTestRunOne
+    [Migration("20220106062124_DBEADCwTwo")]
+    partial class DBEADCwTwo
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,7 +29,6 @@ namespace Coursework.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("CompanyName")
-                        .IsRequired()
                         .HasMaxLength(55)
                         .HasColumnType("nvarchar(55)");
 

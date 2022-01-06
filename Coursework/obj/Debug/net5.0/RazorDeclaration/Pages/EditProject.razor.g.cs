@@ -89,7 +89,7 @@ using Coursework.Data;
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/EditProject/{Id}")]
+    [Microsoft.AspNetCore.Components.RouteAttribute("/EditProject/{Id}/{ProjectType}")]
     public partial class EditProject : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
@@ -98,10 +98,13 @@ using Coursework.Data;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 44 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\EditProject.razor"
+#line 46 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\EditProject.razor"
        
     [Parameter]
     public String Id { get; set; }
+    [Parameter]
+    public String ProjectType { get; set; }
+
     Coursework.Data.Project.Project obj = new Coursework.Data.Project.Project();
     protected override async Task OnInitializedAsync()
     {

@@ -13,23 +13,6 @@
             <DataAnnotationsValidator />
             <div class="row">
                 <div class="col-md-8">
-                    @*To display the project title*@
-                    <div class="form-group">
-                        <label for="CompanyName" class="control-label">Title</label>
-                        <input form="CompanyName" class="form-control" @bind="@obj.Title" />
-                        <ValidationMessage For="@(() => obj.Title)" />
-                    </div>
-                    @*To display the project name*@
-                    <div class="form-group">
-                        <label for="Title" class="control-label">Company Name</label>
-                        <input form="Title" class="form-control" @bind="@obj.CompanyName" />
-                        <ValidationMessage For="@(() => obj.CompanyName)" />
-                    </div>
-                    @*To display the project description*@
-                    <div class="form-group">
-                        <label for="CompanyName" class="control-label">Description</label>
-                        <input form="CompanyName" class="form-control" @bind="@obj.Description" />
-                    </div>
                     @*To display the project type*@
                     <div class="form-group">
                         <label for="Status" class="control-label">Status</label>
@@ -40,6 +23,27 @@
                         </select>
                         <ValidationMessage For="@(() => obj.ProjectType)" />
                     </div>
+                    @*To display the project title*@
+                    <div class="form-group">
+                        <label for="CompanyName" class="control-label">Title</label>
+                        <input form="CompanyName" class="form-control" @bind="@obj.Title" />
+                        <ValidationMessage For="@(() => obj.Title)" />
+                    </div>
+                    @if (obj.ProjectType == "Workplace")
+                    {
+                        @*To display the project name*@
+                        <div class="form-group">
+                            <label for="Title" class="control-label">Company Name</label>
+                            <input form="Title" class="form-control" @bind="@obj.CompanyName" />
+                            <ValidationMessage For="@(() => obj.CompanyName)" />
+                        </div>
+                    }
+                    @*To display the project description*@
+                    <div class="form-group">
+                        <label for="CompanyName" class="control-label">Description</label>
+                        <input form="CompanyName" class="form-control" @bind="@obj.Description" />
+                    </div>
+
                 </div>
             </div>
 
@@ -68,9 +72,6 @@
         protected async void CreateProject()
         {
             if (obj.Title == "")
-            {
-                Console.WriteLine("Error");
-            }else if(obj.CompanyName == "")
             {
                 Console.WriteLine("Error");
             }else if (obj.ProjectType == "0") 

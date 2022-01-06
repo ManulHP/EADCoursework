@@ -63,8 +63,17 @@ else
                         <td>@emp.Status</td>
                         <td>@emp.DueDate</td>
                         <td class="text-right">
-                            <a class="btn btn-primary btn-sm" href="EditTicket/@emp.Id/@ProType" role="button">Edit</a>
-                            <a class="btn btn-danger btn-sm" href="DeleteTicket/@emp.Id/@ProType" role="button">Delete</a>
+                            <AuthorizeView>
+                                <Authorized>
+                                    <a class="btn btn-primary btn-sm" href="EditTicket/@emp.Id/@ProType" role="button">Edit</a>
+                                    <a class="btn btn-danger btn-sm" href="DeleteTicket/@emp.Id/@ProType" role="button">Delete</a>
+                                </Authorized>
+                                <NotAuthorized>
+                                    <a class="btn btn-secondary btn-sm" role="button">Edit</a>
+                                    <a class="btn btn-secondary btn-sm" role="button">Delete</a>
+                                </NotAuthorized>
+                            </AuthorizeView>
+                          
                         </td>
                     </tr>
                 }
@@ -105,8 +114,16 @@ else
                         <td>@emp.Status</td>
                         <td>@emp.DueDate</td>
                         <td class="text-right">
-                            <a class="btn btn-primary btn-sm" href="EditTicket/@emp.Id/@ProType" role="button">Edit</a>
-                            <a class="btn btn-danger btn-sm" href="DeleteTicket/@emp.Id/@ProType" role="button">Delete</a>
+                            <AuthorizeView>
+                                <Authorized>
+                                    <a class="btn btn-primary btn-sm" href="EditTicket/@emp.Id/@ProType" role="button">Edit</a>
+                                    <a class="btn btn-danger btn-sm" href="DeleteTicket/@emp.Id/@ProType" role="button">Delete</a>
+                                </Authorized>
+                                <NotAuthorized>
+                                    <a class="btn btn-secondary btn-sm" role="button">Edit</a>
+                                    <a class="btn btn-secondary btn-sm" role="button">Delete</a>
+                                </NotAuthorized>
+                            </AuthorizeView>
                         </td>
                     </tr>
                 }
@@ -147,8 +164,16 @@ else
                         <td>@emp.Status</td>
                         <td>@emp.DueDate</td>
                         <td class="text-right">
-                            <a class="btn btn-primary btn-sm" href="EditTicket/@emp.Id/@ProType" role="button">Edit</a>
-                            <a class="btn btn-danger btn-sm" href="DeleteTicket/@emp.Id/@ProType" role="button">Delete</a>
+                            <AuthorizeView>
+                                <Authorized>
+                                    <a class="btn btn-primary btn-sm" href="EditTicket/@emp.Id/@ProType" role="button">Edit</a>
+                                    <a class="btn btn-danger btn-sm" href="DeleteTicket/@emp.Id/@ProType" role="button">Delete</a>
+                                </Authorized>
+                                <NotAuthorized>
+                                    <a class="btn btn-secondary btn-sm" role="button">Edit</a>
+                                    <a class="btn btn-secondary btn-sm" role="button">Delete</a>
+                                </NotAuthorized>
+                            </AuthorizeView>
                         </td>
                     </tr>
                 }

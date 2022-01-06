@@ -26,7 +26,6 @@ namespace Coursework.Data.Project
             var queryToSelectAllData = await (from pro in _appDBContext.Projects
                                               select pro).ToListAsync();
 
-            //return await _appDBContext.Projects.ToListAsync();
             return queryToSelectAllData;
 
         }
@@ -66,13 +65,6 @@ namespace Coursework.Data.Project
             return true;
         }
         #endregion
-
-        public async Task<List<Coursework.Data.Project.Project>> GetProjectAsync(int Id)
-        {
-            //Coursework.Data.Ticket.Ticket ticket = await _appDBContext.Tickets.FirstOrDefaultAsync(c => c.Id.Equals(Id));
-            var queryIdProject = await (from pro in _appDBContext.Projects where pro.Id == Id select pro).ToListAsync();
-            return queryIdProject;
-        }
 
     }
 }

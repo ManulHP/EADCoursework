@@ -98,16 +98,13 @@ using Coursework.Data;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 65 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\AddProject.razor"
+#line 69 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\AddProject.razor"
            
         // creating a project object
         Coursework.Data.Project.Project obj = new Coursework.Data.Project.Project();
         protected async void CreateProject()
         {
             if (obj.Title == "")
-            {
-                Console.WriteLine("Error");
-            }else if(obj.CompanyName == "")
             {
                 Console.WriteLine("Error");
             }else if (obj.ProjectType == "0") 

@@ -20,9 +20,6 @@ else
         <div class="col-lg-9">
             <h1>WorkSpace</h1>
         </div>
-        <div class="col-lg-3 text-right">
-            <a class="btn btn-success btn-sm" href="AddProject" role="button">Create New</a>
-        </div>
     </div>
 
     <table class="table table-borderless table-striped table-sm col px-md-2">
@@ -47,8 +44,17 @@ else
                 <td>@emp.ProjectType</td>
                 <td class="text-right">
                     <a class="btn btn-info btn-sm" href="Dash/@emp.Id/@emp.ProjectType" role="button">View</a>
-                    <a class="btn btn-primary btn-sm" href="EditProject/@emp.Id" role="button">Edit</a>
-                    <a class="btn btn-danger btn-sm" href="DeleteProject/@emp.Id" role="button">Delete</a>
+                    <AuthorizeView>
+                        <Authorized>
+                            <a class="btn btn-primary btn-sm" href="EditProject/@emp.Id/@emp.ProjectType" role="button">Edit</a>
+                            <a class="btn btn-danger btn-sm" href="DeleteProject/@emp.Id/@emp.ProjectType" role="button">Delete</a>
+                        </Authorized>
+                        <NotAuthorized>
+                            <a class="btn btn-secondary btn-sm" role="button">Edit</a>
+                            <a class="btn btn-secondary btn-sm" role="button">Delete</a>
+                        </NotAuthorized>
+                    </AuthorizeView>
+                   
                 </td>
             </tr>
                 }
@@ -60,7 +66,6 @@ else
         <thead class="thead-dark">
             <tr>
                 <th style="width:100px">Title</th>
-                <th style="width:200px">Comapany Name</th>
                 <th style="width:800px">Description</th>
                 <th style="width:200px">Project Type</th>
                 <th></th>
@@ -73,13 +78,20 @@ else
                 {
             <tr>
                 <td>@emp.Title</td>
-                <td>@emp.CompanyName</td>
                 <td>@emp.Description</td>
                 <td>@emp.ProjectType</td>
                 <td class="text-right">
                     <a class="btn btn-info btn-sm" href="Dash/@emp.Id/@emp.ProjectType" role="button">View</a>
-                    <a class="btn btn-primary btn-sm" href="EditProject/@emp.Id" role="button">Edit</a>
-                    <a class="btn btn-danger btn-sm" href="DeleteProject/@emp.Id" role="button">Delete</a>
+                    <AuthorizeView>
+                        <Authorized>
+                            <a class="btn btn-primary btn-sm" href="EditProject/@emp.Id/@emp.ProjectType" role="button">Edit</a>
+                            <a class="btn btn-danger btn-sm" href="DeleteProject/@emp.Id/@emp.ProjectType" role="button">Delete</a>
+                        </Authorized>
+                        <NotAuthorized>
+                            <a class="btn btn-secondary btn-sm" role="button">Edit</a>
+                            <a class="btn btn-secondary btn-sm" role="button">Delete</a>
+                        </NotAuthorized>
+                    </AuthorizeView>
                 </td>
             </tr>
                 }

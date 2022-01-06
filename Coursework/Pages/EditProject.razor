@@ -1,4 +1,4 @@
-﻿@page "/EditProject/{Id}"
+﻿@page "/EditProject/{Id}/{ProjectType}"
 @using Coursework.Data
 @inject Coursework.Data.Project.ProjectService projectService
 @inject NavigationManager NavigationManager
@@ -17,11 +17,13 @@
                 <ValidationMessage For="@(() => obj.Title)" />
             </div>
             @*To display the company name*@
-            <div class="form-group">
-                <label for="Title" class="control-label">Company Name</label>
-                <input form="Title" class="form-control" @bind="@obj.CompanyName" />
-                <ValidationMessage For="@(() => obj.CompanyName)" />
-            </div>
+            @if (ProjectType == "Workplace") {
+        <div class="form-group">
+            <label for="Title" class="control-label">Company Name</label>
+            <input form="Title" class="form-control" @bind="@obj.CompanyName" />
+            <ValidationMessage For="@(() => obj.CompanyName)" />
+        </div>
+            }
             @*To display the project description*@
             <div class="form-group">
                 <label for="Description" class="control-label">Description</label>
@@ -44,6 +46,9 @@
 @code {
     [Parameter]
     public String Id { get; set; }
+    [Parameter]
+    public String ProjectType { get; set; }
+
     Coursework.Data.Project.Project obj = new Coursework.Data.Project.Project();
     protected override async Task OnInitializedAsync()
     {

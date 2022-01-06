@@ -105,7 +105,7 @@ using System.IO;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 164 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\Dashboard.razor"
+#line 189 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\Dashboard.razor"
        
     [Parameter]
     public String Id { get; set; }

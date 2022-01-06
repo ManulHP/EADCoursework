@@ -89,7 +89,7 @@ using Coursework.Data;
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/DeleteProject/{Id}")]
+    [Microsoft.AspNetCore.Components.RouteAttribute("/DeleteProject/{Id}/{ProjectType}")]
     public partial class DeleteProject : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
@@ -98,10 +98,12 @@ using Coursework.Data;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 43 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\DeleteProject.razor"
+#line 45 "C:\Users\Manul\Documents\IIT\4th year\enterprise\CW\cw2\final\Coursework\Coursework\Pages\DeleteProject.razor"
        
     [Parameter]
     public String Id { get; set; }
+    [Parameter]
+    public String ProjectType { get; set; }
     Coursework.Data.Project.Project obj = new Coursework.Data.Project.Project();
     protected override async Task OnInitializedAsync()
     {

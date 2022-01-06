@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Coursework.Migrations
 {
-    public partial class BDTestRunOne : Migration
+    public partial class DBEADCwTwo : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -52,7 +52,7 @@ namespace Coursework.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CompanyName = table.Column<string>(type: "nvarchar(55)", maxLength: 55, nullable: false),
+                    CompanyName = table.Column<string>(type: "nvarchar(55)", maxLength: 55, nullable: true),
                     Title = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     ProjectType = table.Column<string>(type: "nvarchar(max)", nullable: false)

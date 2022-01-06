@@ -12,8 +12,7 @@ namespace Coursework.Data.Project
         [Key]
         public Int32 Id { get; set; }
 
-        [Required(ErrorMessage = "Company name is required*")]
-        [StringLength(55, ErrorMessage = "Exceeds the word link")]
+        [StringLength(55, ErrorMessage = "Exceeds the word link",MinimumLength =5)]
         [MinLength(5,ErrorMessage ="The minimum length of the text should 5")]
         public String CompanyName { get; set; }
 

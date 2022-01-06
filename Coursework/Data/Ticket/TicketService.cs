@@ -34,7 +34,7 @@ namespace Coursework.Data.Ticket
             var queryToSelectAllData = await (from pro in _appDBContext.Tickets
                                               select pro).ToListAsync();
 
-            //return await _appDBContext.Tickets.ToListAsync();
+            
             return queryToSelectAllData;
         }
         #endregion
